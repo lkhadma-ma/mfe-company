@@ -11,9 +11,21 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
+    "moduleResolution": "node",
     "target": "ES2022",
-    "module": "preserve"
+    "module": "es2022",
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": [
+        "projects/company/src/app/shared/*",
+      ],
+      "@domains/*": [
+        "projects/company/src/app/domains/*",
+      ]
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

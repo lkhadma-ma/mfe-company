@@ -11,7 +11,7 @@
     "build:styles-manifest": "node ./scripts/generate-styles-manifest.js",
     "watch:styles-manifest": "chokidar \"dist/company/browser/styles*.css\" -c \"node ./scripts/generate-styles-manifest.js\"",
     "watch": "concurrently \"ng build company --watch\" \"npm run watch:styles-manifest\"",
-    "serve": "concurrently \"npm run watch\" \"browser-sync start --server dist/company/browser --files dist/company/browser --port 4204 --no-open\""
+    "serve": "concurrently \"npm run watch\" \"browser-sync start --server dist/company/browser --files dist/company/browser --port 4207 --no-open\""
   },
   "prettier": {
     "overrides": [

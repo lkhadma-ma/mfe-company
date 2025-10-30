@@ -12,7 +12,7 @@ export class CompanyStore {
     private alert = inject(AlertService);
 
     // Constants
-    private readonly baseUrl = 'http://localhost:8080/mbe-user/api/v1';
+    private readonly baseUrl = 'http://localhost:8083/mbe-company/api/v1';
     
     // Signals
     private companySignal = signal<CompanyComplated | null>(null);

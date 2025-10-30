@@ -9,26 +9,26 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="mfe-user-relative mfe-user-w-full">
+    <div class="mfe-company-relative mfe-company-w-full">
   <!-- Selected Tags Display -->
   <div 
-    class="mfe-user-flex mfe-user-flex-wrap mfe-user-items-center mfe-user-gap-2 mfe-user-p-3 mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-lg mfe-user-min-h-[44px] mfe-user-cursor-pointer mfe-user-bg-white mfe-user-transition-colors mfe-user-duration-200"
-    [class.mfe-user-border-red-500]="isInvalid"
-    [class.mfe-user-border-blue-500]="isOpen"
-    [class.mfe-user-ring-2]="isOpen"
-    [class.mfe-user-ring-blue-200]="isOpen"
+    class="mfe-company-flex mfe-company-flex-wrap mfe-company-items-center mfe-company-gap-2 mfe-company-p-3 mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-lg mfe-company-min-h-[44px] mfe-company-cursor-pointer mfe-company-bg-white mfe-company-transition-colors mfe-company-duration-200"
+    [class.mfe-company-border-red-500]="isInvalid"
+    [class.mfe-company-border-blue-500]="isOpen"
+    [class.mfe-company-ring-2]="isOpen"
+    [class.mfe-company-ring-blue-200]="isOpen"
     (click)="toggleDropdown()"
   >
     <!-- Selected Tags -->
     <div 
       *ngFor="let selectedOption of selectedOptions; let i = index" 
-      class="mfe-user-bg-blue-50 mfe-user-text-blue-700 mfe-user-px-3 mfe-user-py-1.5 mfe-user-rounded-full mfe-user-text-sm mfe-user-flex mfe-user-items-center mfe-user-gap-2 mfe-user-border mfe-user-border-blue-200 mfe-user-transition-colors mfe-user-duration-150"
+      class="mfe-company-bg-blue-50 mfe-company-text-blue-700 mfe-company-px-3 mfe-company-py-1.5 mfe-company-rounded-full mfe-company-text-sm mfe-company-flex mfe-company-items-center mfe-company-gap-2 mfe-company-border mfe-company-border-blue-200 mfe-company-transition-colors mfe-company-duration-150"
     >
-      <span class="mfe-user-font-medium">{{ selectedOption.label }}</span>
+      <span class="mfe-company-font-medium">{{ selectedOption.label }}</span>
       <button 
         type="button"
         (click)="removeTag($event, i)"
-        class="mfe-user-w-5 mfe-user-h-5 mfe-user-rounded-full mfe-user-bg-blue-100 hover:mfe-user-bg-blue-200 mfe-user-flex mfe-user-items-center mfe-user-justify-center mfe-user-text-blue-600 hover:mfe-user-text-blue-800 mfe-user-transition-colors mfe-user-duration-150 mfe-user-text-xs mfe-user-font-bold"
+        class="mfe-company-w-5 mfe-company-h-5 mfe-company-rounded-full mfe-company-bg-blue-100 hover:mfe-company-bg-blue-200 mfe-company-flex mfe-company-items-center mfe-company-justify-center mfe-company-text-blue-600 hover:mfe-company-text-blue-800 mfe-company-transition-colors mfe-company-duration-150 mfe-company-text-xs mfe-company-font-bold"
       >
         ×
       </button>
@@ -42,22 +42,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
       [placeholder]="selectedOptions.length === 0 ? placeholder : 'Add more...'"
       (keydown)="onTagInputKeydown($event)"
       (blur)="onTagInputBlur()"
-      class="mfe-user-outline-none mfe-user-min-w-[120px] mfe-user-flex-1 mfe-user-bg-transparent mfe-user-text-gray-700 mfe-user-placeholder-gray-400"
+      class="mfe-company-outline-none mfe-company-min-w-[120px] mfe-company-flex-1 mfe-company-bg-transparent mfe-company-text-gray-700 mfe-company-placeholder-gray-400"
     >
 
     <!-- Placeholder when no selection -->
     <div 
       *ngIf="selectedOptions.length === 0 && mode !== 'tags'" 
-      class="mfe-user-text-gray-500 mfe-user-text-sm mfe-user-italic"
+      class="mfe-company-text-gray-500 mfe-company-text-sm mfe-company-italic"
     >
       {{ placeholder }}
     </div>
   </div>
 
   <!-- Dropdown Arrow -->
-  <div class="mfe-user-absolute mfe-user-top-1/2 mfe-user-right-3 mfe-user-transform mfe-user--translate-y-1/2 mfe-user-pointer-events-none mfe-user-transition-transform mfe-user-duration-200"
-       [class.mfe-user-rotate-180]="isOpen">
-    <svg class="mfe-user-w-4 mfe-user-h-4 mfe-user-text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div class="mfe-company-absolute mfe-company-top-1/2 mfe-company-right-3 mfe-company-transform mfe-company--translate-y-1/2 mfe-company-pointer-events-none mfe-company-transition-transform mfe-company-duration-200"
+       [class.mfe-company-rotate-180]="isOpen">
+    <svg class="mfe-company-w-4 mfe-company-h-4 mfe-company-text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
     </svg>
   </div>
@@ -65,12 +65,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
   <!-- Dropdown Menu -->
   <div 
     *ngIf="isOpen"
-    class="mfe-user-absolute mfe-user-z-50 mfe-user-w-full mfe-user-bg-white mfe-user-border mfe-user-border-gray-200 mfe-user-rounded-lg mfe-user-shadow-xl mfe-user-mt-2 mfe-user-max-h-60 mfe-user-overflow-y-auto mfe-user-animate-in mfe-user-fade-in mfe-user-slide-in-from-top-1"
+    class="mfe-company-absolute mfe-company-z-50 mfe-company-w-full mfe-company-bg-white mfe-company-border mfe-company-border-gray-200 mfe-company-rounded-lg mfe-company-shadow-xl mfe-company-mt-2 mfe-company-max-h-60 mfe-company-overflow-y-auto mfe-company-animate-in mfe-company-fade-in mfe-company-slide-in-from-top-1"
   >
     <!-- Search Input -->
-    <div *ngIf="searchable" class="mfe-user-sticky mfe-user-top-0 mfe-user-bg-white mfe-user-p-3 mfe-user-border-b mfe-user-border-gray-100 mfe-user-z-10">
-      <div class="mfe-user-relative">
-        <svg class="mfe-user-absolute mfe-user-left-3 mfe-user-top-1/2 mfe-user-transform mfe-user--translate-y-1/2 mfe-user-w-4 mfe-user-h-4 mfe-user-text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div *ngIf="searchable" class="mfe-company-sticky mfe-company-top-0 mfe-company-bg-white mfe-company-p-3 mfe-company-border-b mfe-company-border-gray-100 mfe-company-z-10">
+      <div class="mfe-company-relative">
+        <svg class="mfe-company-absolute mfe-company-left-3 mfe-company-top-1/2 mfe-company-transform mfe-company--translate-y-1/2 mfe-company-w-4 mfe-company-h-4 mfe-company-text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
         <input
@@ -78,24 +78,24 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
           type="text"
           [placeholder]="searchPlaceholder"
           (input)="onSearchChange($event)"
-          class="mfe-user-w-full mfe-user-pl-10 mfe-user-pr-3 mfe-user-py-2.5 mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-lg mfe-user-text-sm focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500 focus:mfe-user-border-blue-500 mfe-user-bg-gray-50"
+          class="mfe-company-w-full mfe-company-pl-10 mfe-company-pr-3 mfe-company-py-2.5 mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-lg mfe-company-text-sm focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500 focus:mfe-company-border-blue-500 mfe-company-bg-gray-50"
         >
       </div>
     </div>
 
     <!-- Options -->
-    <div class="mfe-user-py-2">
+    <div class="mfe-company-py-2">
       <div 
         *ngFor="let option of filteredOptions"
         (click)="toggleOption(option)"
-        [class.mfe-user-bg-blue-50]="isSelected(option)"
-        [class.mfe-user-text-blue-700]="isSelected(option)"
-        class="mfe-user-px-4 mfe-user-py-3 mfe-user-cursor-pointer mfe-user-text-sm mfe-user-transition-colors mfe-user-duration-150 hover:mfe-user-bg-gray-50 mfe-user-flex mfe-user-items-center mfe-user-justify-between mfe-user-border-l-2 mfe-user-border-transparent"
-        [class.mfe-user-border-l-blue-500]="isSelected(option)"
+        [class.mfe-company-bg-blue-50]="isSelected(option)"
+        [class.mfe-company-text-blue-700]="isSelected(option)"
+        class="mfe-company-px-4 mfe-company-py-3 mfe-company-cursor-pointer mfe-company-text-sm mfe-company-transition-colors mfe-company-duration-150 hover:mfe-company-bg-gray-50 mfe-company-flex mfe-company-items-center mfe-company-justify-between mfe-company-border-l-2 mfe-company-border-transparent"
+        [class.mfe-company-border-l-blue-500]="isSelected(option)"
       >
-        <span class="mfe-user-font-medium">{{ option.label }}</span>
-        <span *ngIf="isSelected(option)" class="mfe-user-text-blue-600 mfe-user-font-bold">
-          <svg class="mfe-user-w-4 mfe-user-h-4" fill="currentColor" viewBox="0 0 20 20">
+        <span class="mfe-company-font-medium">{{ option.label }}</span>
+        <span *ngIf="isSelected(option)" class="mfe-company-text-blue-600 mfe-company-font-bold">
+          <svg class="mfe-company-w-4 mfe-company-h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
           </svg>
         </span>
@@ -104,13 +104,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
       <!-- No Results -->
       <div 
         *ngIf="filteredOptions.length === 0" 
-        class="mfe-user-px-4 mfe-user-py-8 mfe-user-text-center mfe-user-text-gray-500 mfe-user-text-sm"
+        class="mfe-company-px-4 mfe-company-py-8 mfe-company-text-center mfe-company-text-gray-500 mfe-company-text-sm"
       >
-        <svg class="mfe-user-w-12 mfe-user-h-12 mfe-user-mx-auto mfe-user-mb-2 mfe-user-text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="mfe-company-w-12 mfe-company-h-12 mfe-company-mx-auto mfe-company-mb-2 mfe-company-text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
         </svg>
-        <p class="mfe-user-font-medium">No options found</p>
-        <p class="mfe-user-text-xs mfe-user-mt-1">Try adjusting your search</p>
+        <p class="mfe-company-font-medium">No options found</p>
+        <p class="mfe-company-text-xs mfe-company-mt-1">Try adjusting your search</p>
       </div>
     </div>
   </div>

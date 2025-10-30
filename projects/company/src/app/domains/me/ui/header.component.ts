@@ -10,19 +10,19 @@ import { CompanyHeader } from '../data-access/company';
   standalone: true,
   imports: [CommonModule, FormsModule, FormHeaderComponent, CompanyHeadlineComponent],
   host: {
-    class: 'mfe-user-w-full',
+    class: 'mfe-company-w-full',
   },
   template: `
-    <div class="mfe-user-border mfe-user-rounded-xl mfe-user-bg-white">
+    <div class="mfe-company-border mfe-company-rounded-xl mfe-company-bg-white">
       <!-- Header background -->
-      <div class="mfe-user-relative mfe-user-aspect-[16/4]">
+      <div class="mfe-company-relative mfe-company-aspect-[16/4]">
         <img loading="lazy"
-          class="mfe-user-w-full mfe-user-bg-cover mfe-user-bg-center mfe-user-max-h-[201px] mfe-user-border-t-4 mfe-user-rounded-t-md mfe-user-border-[#F8C77D]"
+          class="mfe-company-w-full mfe-company-bg-cover mfe-company-bg-center mfe-company-max-h-[201px] mfe-company-border-t-4 mfe-company-rounded-t-md mfe-company-border-[#F8C77D]"
           [src]="company.bg"
           alt="bg"
         />
         <p
-          class="mfe-user-absolute mfe-user-text-xs mfe-user-font-medium mfe-user-tracking-widest mfe-user-text-gray-300 mfe-user-uppercase mfe-user-left-1 mfe-user-top-2"
+          class="mfe-company-absolute mfe-company-text-xs mfe-company-font-medium mfe-company-tracking-widest mfe-company-text-gray-300 mfe-company-uppercase mfe-company-left-1 mfe-company-top-2"
         >
           premium
         </p>
@@ -31,7 +31,7 @@ import { CompanyHeader } from '../data-access/company';
         <span
           *ngIf="isCurrentCompany"
           (click)="loadImageFromDrive('bg')"
-          class="mfe-user-cursor-pointer mfe-user-absolute mfe-user-top-0 mfe-user-right-[0.5rem] hover:mfe-user-scale-105 mfe-user-w-10 mfe-user-h-10 mfe-user-rounded-full mfe-user-bg-white mfe-user-flex mfe-user-items-center mfe-user-justify-center mfe-user-shadow-md mfe-user-mt-3 mfe-user-ml-3"
+          class="mfe-company-cursor-pointer mfe-company-absolute mfe-company-top-0 mfe-company-right-[0.5rem] hover:mfe-company-scale-105 mfe-company-w-10 mfe-company-h-10 mfe-company-rounded-full mfe-company-bg-white mfe-company-flex mfe-company-items-center mfe-company-justify-center mfe-company-shadow-md mfe-company-mt-3 mfe-company-ml-3"
         >
           <i class="fa-solid fa-pencil"></i>
         </span>
@@ -41,18 +41,18 @@ import { CompanyHeader } from '../data-access/company';
 
       <!-- Avatar -->
       <div
-        class="mfe-user-relative mfe-user-flex mfe-user-items-center mfe-user-justify-center max-sm:-mfe-user-mt-[2.5rem] -mfe-user-mt-[6rem] mfe-user-ml-[2rem] max-sm:mfe-user-w-[5rem] max-sm:mfe-user-h-[5rem] mfe-user-h-[150px] mfe-user-w-[150px] mfe-user-rounded-full"
+        class="mfe-company-relative mfe-company-flex mfe-company-items-center mfe-company-justify-center max-sm:-mfe-company-mt-[2.5rem] -mfe-company-mt-[6rem] mfe-company-ml-[2rem] max-sm:mfe-company-w-[5rem] max-sm:mfe-company-h-[5rem] mfe-company-h-[150px] mfe-company-w-[150px] mfe-company-rounded-full"
       >
         <!-- Edit avatar -->
         <span
             *ngIf="isCurrentCompany"
             (click)="loadImageFromDrive('avatar')"
-            class="mfe-user-z-[12] mfe-user-cursor-pointer mfe-user-absolute mfe-user-top-0 mfe-user-right-[-0.5rem] hover:mfe-user-scale-105 mfe-user-w-10 mfe-user-h-10 mfe-user-rounded-full mfe-user-bg-white mfe-user-flex mfe-user-items-center mfe-user-justify-center mfe-user-shadow-md mfe-user-mt-3 mfe-user-mr-3"
+            class="mfe-company-z-[12] mfe-company-cursor-pointer mfe-company-absolute mfe-company-top-0 mfe-company-right-[-0.5rem] hover:mfe-company-scale-105 mfe-company-w-10 mfe-company-h-10 mfe-company-rounded-full mfe-company-bg-white mfe-company-flex mfe-company-items-center mfe-company-justify-center mfe-company-shadow-md mfe-company-mt-3 mfe-company-mr-3"
           >
             <i class="fa-solid fa-pencil"></i>
         </span>
         <img
-          class="mfe-user-z-10 mfe-user-w-full mfe-user-h-full mfe-user-border-white mfe-user-border-4 mfe-user-rounded-full"
+          class="mfe-company-z-10 mfe-company-w-full mfe-company-h-full mfe-company-border-white mfe-company-border-4 mfe-company-rounded-full"
           [src]="company.avatar"
           alt="Me"
           loading="lazy"
@@ -60,16 +60,16 @@ import { CompanyHeader } from '../data-access/company';
       </div>
 
       <!-- Name + Headline + Skills -->
-      <div class="mfe-user-flex mfe-user-flex-col mfe-user-px-4 mfe-user-py-3 mfe-user-relative">
+      <div class="mfe-company-flex mfe-company-flex-col mfe-company-px-4 mfe-company-py-3 mfe-company-relative">
         <span
             *ngIf="isCurrentCompany"
             (click)="from()?.openHeaderModal()"
-            class="mfe-user-z-10 mfe-user-cursor-pointer mfe-user-absolute mfe-user-top-[-4rem] mfe-user-right-[-.25rem] hover:mfe-user-scale-105 mfe-user-w-10 mfe-user-h-10 mfe-user-rounded-full mfe-user-bg-white mfe-user-flex mfe-user-items-center mfe-user-justify-center mfe-user-shadow-md mfe-user-mt-3 mfe-user-mr-3"
+            class="mfe-company-z-10 mfe-company-cursor-pointer mfe-company-absolute mfe-company-top-[-4rem] mfe-company-right-[-.25rem] hover:mfe-company-scale-105 mfe-company-w-10 mfe-company-h-10 mfe-company-rounded-full mfe-company-bg-white mfe-company-flex mfe-company-items-center mfe-company-justify-center mfe-company-shadow-md mfe-company-mt-3 mfe-company-mr-3"
           >
             <i class="fa-solid fa-pencil"></i>
         </span>
           <h1
-            class="mfe-user-font-semibold mfe-user-tracking-wide sm:mfe-user-text-2xl"
+            class="mfe-company-font-semibold mfe-company-tracking-wide sm:mfe-company-text-2xl"
           >
             {{ company.name }}
           </h1>

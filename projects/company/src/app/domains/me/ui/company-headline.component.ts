@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <p class="mfe-user-text-xs sm:mfe-user-text-base">
+    <p class="mfe-company-text-xs sm:mfe-company-text-base">
     <ng-content></ng-content>
     
     </p>
-
   ` 
 })
 export class CompanyHeadlineComponent {}

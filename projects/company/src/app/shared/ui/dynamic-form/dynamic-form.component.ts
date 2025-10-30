@@ -71,54 +71,54 @@ export interface FormConfig {
     <!-- Modal Backdrop -->
     <div
       *ngIf="isOpen"
-      class="mfe-user-fixed mfe-user-inset-0 mfe-user-bg-black mfe-user-bg-opacity-50 mfe-user-flex mfe-user-items-center mfe-user-justify-center mfe-user-p-4 mfe-user-z-50 mfe-user-w-screen mfe-user-h-screen"
+      class="mfe-company-fixed mfe-company-inset-0 mfe-company-bg-black mfe-company-bg-opacity-50 mfe-company-flex mfe-company-items-center mfe-company-justify-center mfe-company-p-4 mfe-company-z-50 mfe-company-w-screen mfe-company-h-screen"
       (click)="onBackdropClick($event)"
     >
       <!-- Modal Container -->
       <div
-        class="mfe-user-bg-white mfe-user-rounded-lg mfe-user-shadow-xl mfe-user-max-w-2xl mfe-user-w-full mfe-user-max-h-[90vh] mfe-user-overflow-hidden mfe-user-flex mfe-user-flex-col"
+        class="mfe-company-bg-white mfe-company-rounded-lg mfe-company-shadow-xl mfe-company-max-w-2xl mfe-company-w-full mfe-company-max-h-[90vh] mfe-company-overflow-hidden mfe-company-flex mfe-company-flex-col"
       >
         <!-- Form -->
         <form
           [formGroup]="form"
           (ngSubmit)="onSubmit()"
-          class="mfe-user-flex mfe-user-flex-col mfe-user-h-full mfe-user-overflow-hidden"
+          class="mfe-company-flex mfe-company-flex-col mfe-company-h-full mfe-company-overflow-hidden"
         >
           <!-- Fixed Header -->
           <div
-            class="mfe-user-flex-shrink-0 mfe-user-p-6 mfe-user-border-b mfe-user-border-gray-200 mfe-user-bg-white"
+            class="mfe-company-flex-shrink-0 mfe-company-p-6 mfe-company-border-b mfe-company-border-gray-200 mfe-company-bg-white"
           >
             <h2
-              class="mfe-user-text-2xl mfe-user-font-semibold mfe-user-text-gray-900"
+              class="mfe-company-text-2xl mfe-company-font-semibold mfe-company-text-gray-900"
             >
               {{ config.title }}
             </h2>
             <p
               *ngIf="config.subtitle"
-              class="mfe-user-mt-1 mfe-user-text-sm mfe-user-text-gray-600"
+              class="mfe-company-mt-1 mfe-company-text-sm mfe-company-text-gray-600"
             >
               {{ config.subtitle }}
             </p>
           </div>
 
           <!-- Scrollable Form Content -->
-          <div class="mfe-user-flex-1 mfe-user-overflow-y-auto mfe-user-p-6">
-            <div class="mfe-user-space-y-6">
+          <div class="mfe-company-flex-1 mfe-company-overflow-y-auto mfe-company-p-6">
+            <div class="mfe-company-space-y-6">
               <!-- Form Sections -->
               <div
                 *ngFor="let section of config.sections"
-                class="mfe-user-space-y-4"
+                class="mfe-company-space-y-4"
               >
                 <!-- Section Header -->
-                <div *ngIf="section.title" class="mfe-user-mb-4">
+                <div *ngIf="section.title" class="mfe-company-mb-4">
                   <h3
-                    class="mfe-user-text-lg mfe-user-font-medium mfe-user-text-gray-900"
+                    class="mfe-company-text-lg mfe-company-font-medium mfe-company-text-gray-900"
                   >
                     {{ section.title }}
                   </h3>
                   <p
                     *ngIf="section.description"
-                    class="mfe-user-mt-1 mfe-user-text-sm mfe-user-text-gray-600"
+                    class="mfe-company-mt-1 mfe-company-text-sm mfe-company-text-gray-600"
                   >
                     {{ section.description }}
                   </p>
@@ -127,21 +127,21 @@ export interface FormConfig {
                 <!-- Form Fields Grid -->
                 <div
                   [class]="getGridClass(section.columns || 1)"
-                  class="mfe-user-gap-4"
+                  class="mfe-company-gap-4"
                 >
                   <!-- Text Input -->
                   <div
                     *ngFor="let field of section.fields"
                     [class.hidden]="field.hidden"
-                    class="mfe-user-space-y-2"
+                    class="mfe-company-space-y-2"
                   >
                     <!-- Your existing modal structure remains the same -->
 
                     <!-- Inside the form fields section, add the multi-select case -->
                     <div *ngIf="field.type === 'multiselect'">
-                      <label [for]="field.key" class="mfe-user-block mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700">
+                      <label [for]="field.key" class="mfe-company-block mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700">
                         {{ field.label }}
-                        <span *ngIf="field.required" class="mfe-user-text-red-500">*</span>
+                        <span *ngIf="field.required" class="mfe-company-text-red-500">*</span>
                       </label>
                       
                       <mfe-company-multi-select
@@ -153,7 +153,7 @@ export interface FormConfig {
                         [isInvalid]="isFieldInvalid(field)"
                       ></mfe-company-multi-select>
                       
-                      <div *ngIf="isFieldInvalid(field)" class="mfe-user-text-sm mfe-user-text-red-600 mfe-user-mt-1">
+                      <div *ngIf="isFieldInvalid(field)" class="mfe-company-text-sm mfe-company-text-red-600 mfe-company-mt-1">
                         {{ getFieldError(field) }}
                       </div>
                     </div>
@@ -179,12 +179,12 @@ export interface FormConfig {
                     >
                       <label
                         [for]="field.key"
-                        class="mfe-user-block mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700"
+                        class="mfe-company-block mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700"
                       >
                         {{ field.label }}
                         <span
                           *ngIf="field.required"
-                          class="mfe-user-text-red-500"
+                          class="mfe-company-text-red-500"
                           >*</span
                         >
                       </label>
@@ -193,12 +193,12 @@ export interface FormConfig {
                         [type]="field.type"
                         [formControlName]="field.key"
                         [placeholder]="field.placeholder || ''"
-                        [class.mfe-user-border-red-300]="isFieldInvalid(field)"
-                        class="mfe-user-w-full mfe-user-px-3 mfe-user-py-2 mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-md mfe-user-shadow-sm focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500 focus:mfe-user-border-blue-500"
+                        [class.mfe-company-border-red-300]="isFieldInvalid(field)"
+                        class="mfe-company-w-full mfe-company-px-3 mfe-company-py-2 mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-md mfe-company-shadow-sm focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500 focus:mfe-company-border-blue-500"
                       />
                       <div
                         *ngIf="isFieldInvalid(field)"
-                        class="mfe-user-text-sm mfe-user-text-red-600"
+                        class="mfe-company-text-sm mfe-company-text-red-600"
                       >
                         {{ getFieldError(field) }}
                       </div>
@@ -206,18 +206,18 @@ export interface FormConfig {
                     <!-- Number and hidden Input -->
                     <div
                       *ngIf="field.type === 'number' || field.type === 'hidden'"
-                      [class.mfe-user-hidden]="
+                      [class.mfe-company-hidden]="
                         field.type === 'hidden'
                       "
                     >
                       <label
                         [for]="field.key"
-                        class="mfe-user-block mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700"
+                        class="mfe-company-block mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700"
                       >
                         {{ field.label }}
                         <span
                           *ngIf="field.required"
-                          class="mfe-user-text-red-500"
+                          class="mfe-company-text-red-500"
                           >*</span
                         >
                       </label>
@@ -226,12 +226,12 @@ export interface FormConfig {
                         type="number"
                         [formControlName]="field.key"
                         [placeholder]="field.placeholder || ''"
-                        [class.mfe-user-border-red-300]="isFieldInvalid(field)"
-                        class="mfe-user-w-full mfe-user-px-3 mfe-user-py-2 mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-md mfe-user-shadow-sm focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500 focus:mfe-user-border-blue-500"
+                        [class.mfe-company-border-red-300]="isFieldInvalid(field)"
+                        class="mfe-company-w-full mfe-company-px-3 mfe-company-py-2 mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-md mfe-company-shadow-sm focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500 focus:mfe-company-border-blue-500"
                       />
                       <div
                         *ngIf="isFieldInvalid(field)"
-                        class="mfe-user-text-sm mfe-user-text-red-600"
+                        class="mfe-company-text-sm mfe-company-text-red-600"
                       >
                         {{ getFieldError(field) }}
                       </div>
@@ -241,12 +241,12 @@ export interface FormConfig {
                     <div *ngIf="field.type === 'textarea'">
                       <label
                         [for]="field.key"
-                        class="mfe-user-block mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700"
+                        class="mfe-company-block mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700"
                       >
                         {{ field.label }}
                         <span
                           *ngIf="field.required"
-                          class="mfe-user-text-red-500"
+                          class="mfe-company-text-red-500"
                           >*</span
                         >
                       </label>
@@ -254,14 +254,14 @@ export interface FormConfig {
                         [id]="field.key"
                         [formControlName]="field.key"
                         [placeholder]="field.placeholder || ''"
-                        [class.mfe-user-border-red-300]="isFieldInvalid(field)"
+                        [class.mfe-company-border-red-300]="isFieldInvalid(field)"
                         rows="4"
-                        class="mfe-user-w-full mfe-user-px-3 mfe-user-py-2 mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-md mfe-user-shadow-sm focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500 focus:mfe-user-border-blue-500 mfe-user-resize-none"
+                        class="mfe-company-w-full mfe-company-px-3 mfe-company-py-2 mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-md mfe-company-shadow-sm focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500 focus:mfe-company-border-blue-500 mfe-company-resize-none"
                       >
                       </textarea>
                       <div
                         *ngIf="isFieldInvalid(field)"
-                        class="mfe-user-text-sm mfe-user-text-red-600"
+                        class="mfe-company-text-sm mfe-company-text-red-600"
                       >
                         {{ getFieldError(field) }}
                       </div>
@@ -271,23 +271,23 @@ export interface FormConfig {
                     <div *ngIf="field.type === 'select'">
                       <label
                         [for]="field.key"
-                        class="mfe-user-block mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700"
+                        class="mfe-company-block mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700"
                       >
                         {{ field.label }}
                         <span
                           *ngIf="field.required"
-                          class="mfe-user-text-red-500"
+                          class="mfe-company-text-red-500"
                           >*</span
                         >
                       </label>
                       <select
                         [id]="field.key"
                         [formControlName]="field.key"
-                        [class.mfe-user-border-red-300]="isFieldInvalid(field)"
-                        class="mfe-user-w-full mfe-user-px-3 mfe-user-py-2 mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-md mfe-user-shadow-sm focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500 focus:mfe-user-border-blue-500"
+                        [class.mfe-company-border-red-300]="isFieldInvalid(field)"
+                        class="mfe-company-w-full mfe-company-px-3 mfe-company-py-2 mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-md mfe-company-shadow-sm focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500 focus:mfe-company-border-blue-500"
                       >
                       @if(!hasAnySelectedOption(field.options)){
-                        <option class="mfe-user-text-gray-600" value="" selected>
+                        <option class="mfe-company-text-gray-600" value="" selected>
                           {{ field.placeholder || 'Please select' }}
                         </option>
                       }
@@ -300,7 +300,7 @@ export interface FormConfig {
                       </select>
                       <div
                         *ngIf="isFieldInvalid(field)"
-                        class="mfe-user-text-sm mfe-user-text-red-600"
+                        class="mfe-company-text-sm mfe-company-text-red-600"
                       >
                         {{ getFieldError(field) }}
                       </div>
@@ -309,17 +309,17 @@ export interface FormConfig {
                     <!-- Checkbox -->
                     <div
                       *ngIf="field.type === 'checkbox'"
-                      class="mfe-user-flex mfe-user-items-center"
+                      class="mfe-company-flex mfe-company-items-center"
                     >
                       <label
-                        class="mfe-user-flex mfe-user-items-center mfe-user-space-x-2"
+                        class="mfe-company-flex mfe-company-items-center mfe-company-space-x-2"
                       >
                         <input
                           type="checkbox"
                           [formControlName]="field.key"
-                          class="mfe-user-w-4 mfe-user-h-4 mfe-user-text-blue-600 mfe-user-border-gray-300 mfe-user-rounded focus:mfe-user-ring-blue-500"
+                          class="mfe-company-w-4 mfe-company-h-4 mfe-company-text-blue-600 mfe-company-border-gray-300 mfe-company-rounded focus:mfe-company-ring-blue-500"
                         />
-                        <span class="mfe-user-text-sm mfe-user-text-gray-700">{{
+                        <span class="mfe-company-text-sm mfe-company-text-gray-700">{{
                           field.label
                         }}</span>
                       </label>
@@ -329,12 +329,12 @@ export interface FormConfig {
                     <div *ngIf="field.type === 'date'">
                       <label
                         [for]="field.key"
-                        class="mfe-user-block mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700"
+                        class="mfe-company-block mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700"
                       >
                         {{ field.label }}
                         <span
                           *ngIf="field.required"
-                          class="mfe-user-text-red-500"
+                          class="mfe-company-text-red-500"
                           >*</span
                         >
                       </label>
@@ -342,12 +342,12 @@ export interface FormConfig {
                         [id]="field.key"
                         type="date"
                         [formControlName]="field.key"
-                        [class.mfe-user-border-red-300]="isFieldInvalid(field)"
-                        class="mfe-user-w-full mfe-user-px-3 mfe-user-py-2 mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-md mfe-user-shadow-sm focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500 focus:mfe-user-border-blue-500"
+                        [class.mfe-company-border-red-300]="isFieldInvalid(field)"
+                        class="mfe-company-w-full mfe-company-px-3 mfe-company-py-2 mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-md mfe-company-shadow-sm focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500 focus:mfe-company-border-blue-500"
                       />
                       <div
                         *ngIf="isFieldInvalid(field)"
-                        class="mfe-user-text-sm mfe-user-text-red-600"
+                        class="mfe-company-text-sm mfe-company-text-red-600"
                       >
                         {{ getFieldError(field) }}
                       </div>
@@ -356,30 +356,30 @@ export interface FormConfig {
                     <!-- Radio -->
                     <div *ngIf="field.type === 'radio'">
                       <label
-                        class="mfe-user-block mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700"
+                        class="mfe-company-block mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700"
                       >
                         {{ field.label }}
                         <span
                           *ngIf="field.required"
-                          class="mfe-user-text-red-500"
+                          class="mfe-company-text-red-500"
                           >*</span
                         >
                       </label>
-                      <div class="mfe-user-mt-2 mfe-user-space-y-2">
+                      <div class="mfe-company-mt-2 mfe-company-space-y-2">
                         <div
                           *ngFor="let option of field.options"
-                          class="mfe-user-flex mfe-user-items-center"
+                          class="mfe-company-flex mfe-company-items-center"
                         >
                           <input
                             type="radio"
                             [id]="field.key + '-' + option.value"
                             [formControlName]="field.key"
                             [value]="option.value"
-                            class="mfe-user-w-4 mfe-user-h-4 mfe-user-text-blue-600 mfe-user-border-gray-300 focus:mfe-user-ring-blue-500"
+                            class="mfe-company-w-4 mfe-company-h-4 mfe-company-text-blue-600 mfe-company-border-gray-300 focus:mfe-company-ring-blue-500"
                           />
                           <label
                             [for]="field.key + '-' + option.value"
-                            class="mfe-user-ml-2 mfe-user-text-sm mfe-user-text-gray-700"
+                            class="mfe-company-ml-2 mfe-company-text-sm mfe-company-text-gray-700"
                           >
                             {{ option.label }}
                           </label>
@@ -387,7 +387,7 @@ export interface FormConfig {
                       </div>
                       <div
                         *ngIf="isFieldInvalid(field)"
-                        class="mfe-user-text-sm mfe-user-text-red-600"
+                        class="mfe-company-text-sm mfe-company-text-red-600"
                       >
                         {{ getFieldError(field) }}
                       </div>
@@ -401,19 +401,19 @@ export interface FormConfig {
 
           <!-- Fixed Actions -->
           <div
-            class="mfe-user-flex-shrink-0 mfe-user-flex mfe-user-justify-end mfe-user-space-x-3 mfe-user-p-6 mfe-user-border-t mfe-user-border-gray-200 mfe-user-bg-gray-50"
+            class="mfe-company-flex-shrink-0 mfe-company-flex mfe-company-justify-end mfe-company-space-x-3 mfe-company-p-6 mfe-company-border-t mfe-company-border-gray-200 mfe-company-bg-gray-50"
           >
             <button
               type="button"
               (click)="onCancel()"
-              class="mfe-user-px-4 mfe-user-py-2 mfe-user-text-sm mfe-user-font-medium mfe-user-text-gray-700 mfe-user-bg-white mfe-user-border mfe-user-border-gray-300 mfe-user-rounded-md hover:mfe-user-bg-gray-50 focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500"
+              class="mfe-company-px-4 mfe-company-py-2 mfe-company-text-sm mfe-company-font-medium mfe-company-text-gray-700 mfe-company-bg-white mfe-company-border mfe-company-border-gray-300 mfe-company-rounded-md hover:mfe-company-bg-gray-50 focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500"
             >
               {{ config.cancelText || 'Cancel' }}
             </button>
             <button
               type="submit"
               [disabled]="isSubmitting"
-              class="mfe-user-px-4 mfe-user-py-2 mfe-user-text-sm mfe-user-font-medium mfe-user-text-white mfe-user-bg-blue-600 mfe-user-border mfe-user-border-transparent mfe-user-rounded-md hover:mfe-user-bg-blue-700 focus:mfe-user-outline-none focus:mfe-user-ring-2 focus:mfe-user-ring-blue-500 disabled:mfe-user-bg-blue-300"
+              class="mfe-company-px-4 mfe-company-py-2 mfe-company-text-sm mfe-company-font-medium mfe-company-text-white mfe-company-bg-blue-600 mfe-company-border mfe-company-border-transparent mfe-company-rounded-md hover:mfe-company-bg-blue-700 focus:mfe-company-outline-none focus:mfe-company-ring-2 focus:mfe-company-ring-blue-500 disabled:mfe-company-bg-blue-300"
             >
               {{ isSubmitting ? 'Saving...' : config.submitText || 'Save' }}
             </button>
@@ -527,7 +527,7 @@ export class DynamicFormComponent implements OnInit {
 
   onBackdropClick(event: MouseEvent) {
     if (
-      (event.target as HTMLElement).classList.contains('mfe-user-bg-opacity-50')
+      (event.target as HTMLElement).classList.contains('mfe-company-bg-opacity-50')
     ) {
       this.close();
     }
@@ -571,13 +571,13 @@ export class DynamicFormComponent implements OnInit {
   getGridClass(columns: number): string {
     switch (columns) {
       case 1:
-        return 'mfe-user-grid mfe-user-grid-cols-1';
+        return 'mfe-company-grid mfe-company-grid-cols-1';
       case 2:
-        return 'mfe-user-grid mfe-user-grid-cols-1 md:mfe-user-grid-cols-2';
+        return 'mfe-company-grid mfe-company-grid-cols-1 md:mfe-company-grid-cols-2';
       case 3:
-        return 'mfe-user-grid mfe-user-grid-cols-1 md:mfe-user-grid-cols-3';
+        return 'mfe-company-grid mfe-company-grid-cols-1 md:mfe-company-grid-cols-3';
       default:
-        return 'mfe-user-grid mfe-user-grid-cols-1';
+        return 'mfe-company-grid mfe-company-grid-cols-1';
     }
   }
 }

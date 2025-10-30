@@ -17,6 +17,8 @@ import { ActivatedRoute } from '@angular/router';
           @let isCurrentCompany = isCurrentCompanyInStore();
           @if(company){
             <mfe-company-header [isCurrentCompany]="isCurrentCompany" [company]="company" (update)="updateHeader($event)"></mfe-company-header>
+            <mfe-company-header [isCurrentCompany]="isCurrentCompany" [company]="company" (update)="updateHeader($event)"></mfe-company-header>
+            <mfe-company-header [isCurrentCompany]="isCurrentCompany" [company]="company" (update)="updateHeader($event)"></mfe-company-header>
           }
           </div>
         </div>

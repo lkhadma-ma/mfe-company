@@ -68,7 +68,7 @@ export class CompanyStore {
         case 'avatar':
           const formDatAavatar = new FormData();
           formDatAavatar.append('file', data.avatar!);
-          this.http.put<{ avatar: string }>(`${this.baseUrl}/users/avatar`, formDatAavatar ).subscribe(({ avatar }) => {
+          this.http.put<{ avatar: string }>(`${this.baseUrl}/companies/avatar`, formDatAavatar ).subscribe(({ avatar }) => {
             const current = this.companySignal();
             if (!current) return;
         
@@ -86,7 +86,7 @@ export class CompanyStore {
         case 'bg':
           const formDataBg = new FormData();
           formDataBg.append('file', data.bg!);
-          this.http.put<{ bg: string }>(`${this.baseUrl}/users/bg`, formDataBg).subscribe(({ bg }) => {
+          this.http.put<{ bg: string }>(`${this.baseUrl}/companies/bg`, formDataBg).subscribe(({ bg }) => {
             const current = this.companySignal();
             if (!current) return;
         

@@ -8,7 +8,7 @@ module.exports = withNativeFederation({
       // routes
       './ME_ROUTES':'./projects/company/src/app/domains/me/feature/me.routes.ts',
       // components
-      './MeShellComponent': './projects/user/src/app/domains/me/feature/me-shell.component.ts',
+      './MeShellComponent': './projects/company/src/app/domains/me/feature/me-shell.component.ts',
 
   },
 

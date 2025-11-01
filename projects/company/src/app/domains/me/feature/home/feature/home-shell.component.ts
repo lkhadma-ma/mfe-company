@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
     </div>
   </div>
 
-
   <div class="mfe-company-border mfe-company-rounded-xl mfe-company-bg-white">
     <div class="mfe-company-relative mfe-company-aspect-[16/4] mfe-company-p-3">
       <div class="mfe-company-text-center mfe-company-text-gray-500 mfe-company-text-lg">

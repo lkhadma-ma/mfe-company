@@ -1,15 +1,16 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { SectionComponent } from '@shared/ui/section/section.component';
 import { CompanyStore } from '../data-access/company-store';
 import { HeaderComponent } from "../ui/header.component";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TabsComponent, TapComponent, ContentComponent } from "../ui/taps.component";
 import { HomeShellComponent } from "./home/feature/home-shell.component";
+import { AboutShellComponent } from "./about/feature/about-shell.component";
 
 
 @Component({
   selector: 'mfe-company-me-shell',
-  imports: [SectionComponent, HeaderComponent, TabsComponent, TapComponent, ContentComponent, HomeShellComponent],
+  imports: [SectionComponent, HeaderComponent, TabsComponent, TapComponent, ContentComponent, HomeShellComponent, AboutShellComponent],
   template: `
     <app-section ngxClass="md:mfe-company-pt-[5rem] mfe-company-min-h-screen" >
       <div class="mfe-company-w-full mfe-company-mb-40 md:mfe-company-space-x-6 md:mfe-company-flex">
@@ -19,20 +20,31 @@ import { HomeShellComponent } from "./home/feature/home-shell.component";
           @let isCurrentCompany = isCurrentCompanyInStore();
           @if(company){
             <mfe-company-header [isCurrentCompany]="isCurrentCompany" [company]="company" (update)="updateHeader($event)"></mfe-company-header>
-            <mfe-company-tabs activeTab="Home">
+            <mfe-company-tabs [activeTab]="activeTab()" (onChange)="onChangeTab($event)">
               <mfe-company-tap label="Home"></mfe-company-tap>
-              <mfe-company-tap label="Profile"></mfe-company-tap>
+              <mfe-company-tap label="About"></mfe-company-tap>
+              <mfe-company-tap label="Jobs"></mfe-company-tap>
+              <mfe-company-tap label="Employees"></mfe-company-tap>
 
               <mfe-company-content label="Home" [template]="home">
                 <ng-template #home>
                 <mfe-company-home-shell></mfe-company-home-shell>
                 </ng-template>
-                
               </mfe-company-content>
 
-              <mfe-company-content label="Profile" [template]="profile">
-                <ng-template #profile>
-                  <div>👤 Aquí puedes ver y editar tu perfil</div>
+              <mfe-company-content label="About" [template]="about">
+                <ng-template #about>
+                <mfe-company-about-shell [isCurrentCompany]="isCurrentCompany"></mfe-company-about-shell>
+                </ng-template>
+              </mfe-company-content>
+              <mfe-company-content label="Jobs" [template]="jobs">
+                <ng-template #jobs>
+                <mfe-company-home-shell></mfe-company-home-shell>
+                </ng-template>
+              </mfe-company-content>
+              <mfe-company-content label="Employees" [template]="employees">
+                <ng-template #employees>
+                <mfe-company-home-shell></mfe-company-home-shell>
                 </ng-template>
               </mfe-company-content>
             </mfe-company-tabs>
@@ -50,6 +62,8 @@ import { HomeShellComponent } from "./home/feature/home-shell.component";
 export class MeShellComponent implements OnInit {
   private companyStore = inject(CompanyStore);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  activeTab = signal('Home');
   companyInStore = this.companyStore.company;
   isCurrentCompanyInStore  = this.companyStore.isCurrentcompany;
 
@@ -58,9 +72,23 @@ export class MeShellComponent implements OnInit {
       const companyname = params.get('username')!;
       this.companyStore.loadCompany(companyname);
     });
+    this.route.queryParamMap.subscribe(params => {
+      const activeTab = params.get('tab');
+      if (activeTab) this.activeTab.set(activeTab);
+    });
   }
 
   updateHeader(data: { name?: string; headline?: string; avatar?:File; bg?:File; action:string; }) {
     this.companyStore.updateHeader(data);
+  }
+
+  onChangeTab(tab: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tab },
+      queryParamsHandling: 'merge',
+    }).then(() => {
+      this.activeTab.set(tab);
+    });
   }
 }

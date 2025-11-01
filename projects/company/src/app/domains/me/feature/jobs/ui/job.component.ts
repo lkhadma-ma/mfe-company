@@ -1,13 +1,15 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { JobView } from '../data-access/job';
 import { PencilComponent } from "@shared/ui/pencil/pencil.component";
+import { TrashComponent } from "@shared/ui/trash/trash.component";
 
 @Component({
-  selector: 'mfe-company-card',
+  selector: 'mfe-company-job',
   host: { class: 'mfe-company-w-full sm:mfe-company-w-[16rem] mfe-company-cursor-pointer mfe-company-relative' },
   template: `
   @if(isCurrentCompany()) {
-    <mfe-company-pencil></mfe-company-pencil>
+    <mfe-company-pencil (click)="onEdit.emit()"></mfe-company-pencil>
+    <mfe-company-trash (click)="onDelete.emit()"></mfe-company-trash>
   }
 
   @let jobIn = jobView();
@@ -20,13 +22,26 @@ import { PencilComponent } from "@shared/ui/pencil/pencil.component";
         />  
       <h2 class="mfe-company-text-md mfe-company-font-bold mfe-company-mb-2">{{jobIn.position}}</h2>
       <p class="mfe-company-text-sm mfe-company-text-gray-700 mfe-company-mb-4">{{jobIn.description.substring(0,38)}}...</p>
-      <p class="mfe-company-text-sm mfe-company-text-gray-700 mfe-company-mb-4 mfe-company-mt-4 mfe-company-font-medium"><small>{{jobIn.locationType}}</small></p>
+      <p class="mfe-company-text-sm mfe-company-text-gray-700 mfe-company-mb-4 mfe-company-mt-4 mfe-company-font-medium"><small>{{getValueOptionLocalType(jobIn.locationType)}}</small></p>
     </div>
   }
   `,
-  imports: [PencilComponent]
+  imports: [PencilComponent, TrashComponent]
 })
-export class CardComponent {
+export class JobComponent {
   jobView = input<JobView>();
   isCurrentCompany = input<boolean>(false);
+  onEdit = output<void>();
+  onDelete = output<void>();
+
+  optionsLocalType = [
+    { value: 'REMOTE', label: 'Remote' },
+    { value: 'HYBRID', label: 'Hybrid' },
+    { value: 'ON_SITE', label: 'On-site'}
+  ];
+
+  getValueOptionLocalType(value: string) {
+    const option = this.optionsLocalType.find(option => option.value === value);
+    return option ? option.label : value;
+  }
 }

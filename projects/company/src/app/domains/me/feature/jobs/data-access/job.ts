@@ -1,10 +1,12 @@
+import { EmploymentType } from "./employment-type";
+import { LocationType } from "./location-type";
 
 export type Job = {
     id: string;
     position: string;
     location: string;
-    employmentType: 'Full-time' | 'Part-time' | 'Contract' | 'Internship' | 'Temporary';
-    locationType: 'On-site' | 'Remote' | 'Hybrid';
+    employmentType: EmploymentType;
+    locationType: LocationType;
     description: string;
     skills: {
         label: string;

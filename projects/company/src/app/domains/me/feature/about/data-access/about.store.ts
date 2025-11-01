@@ -17,9 +17,9 @@ export class AboutStore {
         overview: "we are a company that values excellence and innovation. Our mission is to provide top-notch services to our clients while fostering a collaborative and inclusive work environment for our employees.",
         website: "https://www.examplecompany.com",
         industry: "Information Technology",
-        companySize: "201-500 employees",
+        companySize: "51-200",
         founded: "2010",
-        Specialties: "Software Development, Cloud Computing, AI Solutions"
+        specialties: "Software Development, Cloud Computing, AI Solutions"
     });
 
     about = this.aboutSegnal.asReadonly();
@@ -31,6 +31,18 @@ export class AboutStore {
             },
             error: () => {
                 this.alert.show("We couldn't load About Information", 'error');
+            }
+        });
+    }
+
+    updateAbout(data: About) {
+        this.http.put<About>(this.apiUrl, data).subscribe({
+            next: (updatedAbout) => {
+                this.aboutSegnal.set(updatedAbout);
+                this.alert.show("About Information updated successfully", 'success');
+            },
+            error: () => {
+                this.alert.show("We couldn't update About Information", 'error');
             }
         });
     }

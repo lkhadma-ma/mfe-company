@@ -41,7 +41,7 @@ import { CompanyHeader } from '../data-access/company';
 
       <!-- Avatar -->
       <div
-        class="mfe-company-relative mfe-company-flex mfe-company-items-center mfe-company-justify-center max-sm:-mfe-company-mt-[2.5rem] -mfe-company-mt-[6rem] mfe-company-ml-[2rem] max-sm:mfe-company-w-[5rem] max-sm:mfe-company-h-[5rem] mfe-company-h-[150px] mfe-company-w-[150px] mfe-company-rounded-full"
+        class="mfe-company-relative mfe-company-flex mfe-company-items-center mfe-company-justify-center max-sm:-mfe-company-mt-[2.5rem] -mfe-company-mt-[6rem] mfe-company-ml-[2rem] max-sm:mfe-company-w-[5rem] max-sm:mfe-company-h-[5rem] mfe-company-h-[150px] mfe-company-w-[150px] mfe-company-rounded-full mfe-company-bg-white"
       >
         <!-- Edit avatar -->
         <span

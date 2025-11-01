@@ -485,6 +485,9 @@
 .mfe-company-italic {
   font-style: italic;
 }
+.mfe-company-leading-7 {
+  line-height: 1.75rem;
+}
 .mfe-company-tracking-wide {
   letter-spacing: 0.025em;
 }
@@ -534,6 +537,9 @@
 .mfe-company-text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.mfe-company-underline {
+  text-decoration-line: underline;
 }
 .mfe-company-placeholder-gray-400::placeholder {
   --tw-placeholder-opacity: 1;
@@ -696,6 +702,10 @@
   .sm\:mfe-company-text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+  .sm\:mfe-company-text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 @media (min-width: 768px) {

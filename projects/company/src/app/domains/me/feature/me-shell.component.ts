@@ -6,11 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TabsComponent, TapComponent, ContentComponent } from "../ui/taps.component";
 import { HomeShellComponent } from "./home/feature/home-shell.component";
 import { AboutShellComponent } from "./about/feature/about-shell.component";
+import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
 
 
 @Component({
   selector: 'mfe-company-me-shell',
-  imports: [SectionComponent, HeaderComponent, TabsComponent, TapComponent, ContentComponent, HomeShellComponent, AboutShellComponent],
+  imports: [SectionComponent, HeaderComponent, TabsComponent, TapComponent, ContentComponent, HomeShellComponent, AboutShellComponent, JobsShellComponent],
   template: `
     <app-section ngxClass="md:mfe-company-pt-[5rem] mfe-company-min-h-screen" >
       <div class="mfe-company-w-full mfe-company-mb-40 md:mfe-company-space-x-6 md:mfe-company-flex">
@@ -39,7 +40,7 @@ import { AboutShellComponent } from "./about/feature/about-shell.component";
               </mfe-company-content>
               <mfe-company-content label="Jobs" [template]="jobs">
                 <ng-template #jobs>
-                <mfe-company-home-shell></mfe-company-home-shell>
+                <mfe-company-jobs-shell [isCurrentCompany]="isCurrentCompany"></mfe-company-jobs-shell>
                 </ng-template>
               </mfe-company-content>
               <mfe-company-content label="Employees" [template]="employees">

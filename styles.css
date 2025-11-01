@@ -47,6 +47,9 @@
 .mfe-company-top-\[-4rem\] {
   top: -4rem;
 }
+.mfe-company-top-\[0rem\] {
+  top: 0rem;
+}
 .mfe-company-z-10 {
   z-index: 10;
 }
@@ -141,6 +144,9 @@
 .mfe-company-max-h-64 {
   max-height: 16rem;
 }
+.mfe-company-max-h-\[100px\] {
+  max-height: 100px;
+}
 .mfe-company-max-h-\[201px\] {
   max-height: 201px;
 }
@@ -185,6 +191,9 @@
 }
 .mfe-company-max-w-2xl {
   max-width: 42rem;
+}
+.mfe-company-max-w-\[100px\] {
+  max-width: 100px;
 }
 .mfe-company-flex-1 {
   flex: 1 1 0%;
@@ -695,6 +704,9 @@
   }
 }
 @media (min-width: 640px) {
+  .sm\:mfe-company-w-\[16rem\] {
+    width: 16rem;
+  }
   .sm\:mfe-company-text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;

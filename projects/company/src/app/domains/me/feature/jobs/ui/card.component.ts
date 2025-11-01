@@ -6,7 +6,6 @@ import { PencilComponent } from "@shared/ui/pencil/pencil.component";
   selector: 'mfe-company-card',
   host: { class: 'mfe-company-w-full sm:mfe-company-w-[16rem] mfe-company-cursor-pointer mfe-company-relative' },
   template: `
-
   @if(isCurrentCompany()) {
     <mfe-company-pencil></mfe-company-pencil>
   }

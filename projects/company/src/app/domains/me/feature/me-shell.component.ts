@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild, ViewContainerRef, effect, inject, signal } from '@angular/core';
 import { SectionComponent } from '@shared/ui/section/section.component';
 import { CompanyStore } from '../data-access/company-store';
 import { HeaderComponent } from "../ui/header.component";
@@ -7,6 +7,7 @@ import { TabsComponent, TapComponent, ContentComponent } from "../ui/taps.compon
 import { HomeShellComponent } from "./home/feature/home-shell.component";
 import { AboutShellComponent } from "./about/feature/about-shell.component";
 import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
+import { loadRemoteModule } from '@angular-architects/native-federation';
 
 
 @Component({
@@ -50,7 +51,7 @@ import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
           </div>
         </div>
         <div class="mfe-company-hidden mfe-company-w-[400px] lg:mfe-company-block">
-
+          <ng-template #switchAccount></ng-template>
         </div>
       </div>
     </app-section>
@@ -58,6 +59,7 @@ import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
 })
 export class MeShellComponent implements OnInit {
   private companyStore = inject(CompanyStore);
+  private injector = inject(Injector);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
@@ -66,6 +68,19 @@ export class MeShellComponent implements OnInit {
 
   companyInStore = this.companyStore.company;
   isCurrentCompanyInStore  = this.companyStore.isCurrentcompany;
+
+  @ViewChild('switchAccount', { read: ViewContainerRef, static: true })
+  switchAccountContainer!: ViewContainerRef;
+  
+  constructor() {
+    effect(() => {
+      if (this.isCurrentCompanyInStore()) {
+        this.loadsSwitchAccountComponent();
+      } else {
+        this.switchAccountContainer.clear();
+      }
+    });
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -80,6 +95,17 @@ export class MeShellComponent implements OnInit {
       }
       this.activeTab.set('Home');
     });
+  }
+
+  async loadsSwitchAccountComponent() {
+    const switchAccountModule = await loadRemoteModule({
+      remoteName: 'shared', 
+      exposedModule: './ShellSwitchAccountComponent'
+    });
+
+    const shellSwitchAccountComponent = switchAccountModule.ShellSwitchAccountComponent;
+
+    this.switchAccountContainer.createComponent(shellSwitchAccountComponent, { injector: this.injector });
   }
 
   updateHeader(data: { name?: string; headline?: string; avatar?:File; bg?:File; action:string; }) {

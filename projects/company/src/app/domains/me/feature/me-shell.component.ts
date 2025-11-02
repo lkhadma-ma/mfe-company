@@ -25,7 +25,6 @@ import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
               <mfe-company-tap label="Home"></mfe-company-tap>
               <mfe-company-tap label="About"></mfe-company-tap>
               <mfe-company-tap label="Jobs"></mfe-company-tap>
-              <mfe-company-tap label="Employees"></mfe-company-tap>
 
               <mfe-company-content label="Home" [template]="home">
                 <ng-template #home>
@@ -38,14 +37,10 @@ import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
                 <mfe-company-about-shell [isCurrentCompany]="isCurrentCompany"></mfe-company-about-shell>
                 </ng-template>
               </mfe-company-content>
+              
               <mfe-company-content label="Jobs" [template]="jobs">
                 <ng-template #jobs>
                 <mfe-company-jobs-shell [isCurrentCompany]="isCurrentCompany"></mfe-company-jobs-shell>
-                </ng-template>
-              </mfe-company-content>
-              <mfe-company-content label="Employees" [template]="employees">
-                <ng-template #employees>
-                <mfe-company-home-shell></mfe-company-home-shell>
                 </ng-template>
               </mfe-company-content>
             </mfe-company-tabs>

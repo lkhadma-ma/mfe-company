@@ -1,3 +1,4 @@
+import { CompanySize } from "./company-size";
 
 
 export type About = {
@@ -5,7 +6,7 @@ export type About = {
     overview: string;
     website: string;
     industry: string;
-    companySize: string;
+    companySize: CompanySize;
     founded: string;
     specialties: string;
 };

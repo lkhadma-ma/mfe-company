@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from "@angular/core";
 import { AuthHttpService } from "@shared/auth/auth-http.service";
 import { About } from "./about";
 import { AlertService } from "@shared/commun/alert.service";
+import { CompanySize } from "./company-size";
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class AboutStore {
         overview: "we are a company that values excellence and innovation. Our mission is to provide top-notch services to our clients while fostering a collaborative and inclusive work environment for our employees.",
         website: "https://www.examplecompany.com",
         industry: "Information Technology",
-        companySize: "51-200",
+        companySize: CompanySize["201-500"],
         founded: "2010",
         specialties: "Software Development, Cloud Computing, AI Solutions"
     });

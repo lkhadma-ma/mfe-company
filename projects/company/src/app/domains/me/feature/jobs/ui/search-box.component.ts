@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
         type="search"
         placeholder="Search"
         (ngModelChange)="onChange($event)"
-        class="mfe-company-border-2 mfe-company-border-gray-300 mfe-company-bg-white mfe-company-h-10 mfe-company-px-5 mfe-company-rounded-lg mfe-company-text-sm focus:mfe-company-outline-none"
+        class="mfe-company-border-2 mfe-company-border-gray-300 mfe-company-bg-white mfe-company-h-10 mfe-company-px-5 mfe-company-rounded-lg mfe-company-text-sm focus:mfe-company-outline-none mfe-company-w-1/2"
       />
     </form>
   `

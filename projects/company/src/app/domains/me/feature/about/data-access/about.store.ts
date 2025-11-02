@@ -9,7 +9,7 @@ import { CompanySize } from "./company-size";
     providedIn: 'root'
 })
 export class AboutStore {
-    private apiUrl = 'http://localhost:8083/api/v1/companies/about';
+    private apiUrl = 'http://localhost:8083/api/v1/about';
 
     private http = inject(AuthHttpService);
     private alert = inject(AlertService);

@@ -22,9 +22,10 @@ import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
           @if(company){
             <mfe-company-header [isCurrentCompany]="isCurrentCompany" [company]="company" (update)="updateHeader($event)"></mfe-company-header>
             <mfe-company-tabs [activeTab]="activeTab()" (onChange)="onChangeTab($event)">
-              <mfe-company-tap label="Home"></mfe-company-tap>
-              <mfe-company-tap label="About"></mfe-company-tap>
-              <mfe-company-tap label="Jobs"></mfe-company-tap>
+
+              @for (avinableTab of avinableTabs; track $index) {
+                <mfe-company-tap [label]="avinableTab"></mfe-company-tap>
+              }
 
               <mfe-company-content label="Home" [template]="home">
                 <ng-template #home>
@@ -37,7 +38,7 @@ import { JobsShellComponent } from "./jobs/feature/jobs-shell.component";
                 <mfe-company-about-shell [isCurrentCompany]="isCurrentCompany"></mfe-company-about-shell>
                 </ng-template>
               </mfe-company-content>
-              
+
               <mfe-company-content label="Jobs" [template]="jobs">
                 <ng-template #jobs>
                 <mfe-company-jobs-shell [isCurrentCompany]="isCurrentCompany"></mfe-company-jobs-shell>
@@ -59,7 +60,10 @@ export class MeShellComponent implements OnInit {
   private companyStore = inject(CompanyStore);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+
   activeTab = signal('Home');
+  avinableTabs = ['Home', 'About', 'Jobs'];
+
   companyInStore = this.companyStore.company;
   isCurrentCompanyInStore  = this.companyStore.isCurrentcompany;
 
@@ -70,7 +74,11 @@ export class MeShellComponent implements OnInit {
     });
     this.route.queryParamMap.subscribe(params => {
       const activeTab = params.get('tab');
-      if (activeTab) this.activeTab.set(activeTab);
+      if(activeTab && this.avinableTabs.includes(activeTab)){
+        this.activeTab.set(activeTab);
+        return;
+      }
+      this.activeTab.set('Home');
     });
   }
 

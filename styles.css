@@ -315,6 +315,9 @@
 .mfe-company-border {
   border-width: 1px;
 }
+.mfe-company-border-2 {
+  border-width: 2px;
+}
 .mfe-company-border-4 {
   border-width: 4px;
 }
@@ -433,6 +436,10 @@
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.mfe-company-px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
 .mfe-company-py-1\.5 {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
@@ -462,6 +469,9 @@
 }
 .mfe-company-pr-3 {
   padding-right: 0.75rem;
+}
+.mfe-company-pt-2 {
+  padding-top: 0.5rem;
 }
 .mfe-company-text-center {
   text-align: center;

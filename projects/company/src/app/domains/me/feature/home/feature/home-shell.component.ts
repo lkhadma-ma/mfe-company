@@ -1,29 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { SectionComponent } from "../ui/section.component";
+import { OverviewComponent } from "../ui/overview.component";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'mfe-company-home-shell',
   host: { class: 'mfe-company-w-full mfe-company-space-y-4' },
   template: `
-  <div class="mfe-company-border mfe-company-rounded-xl mfe-company-bg-white">
-    <div class="mfe-company-relative mfe-company-aspect-[16/4] mfe-company-p-3">
-      <span class="mfe-company-text-gray-500 mfe-company-text-lg">🏠 Home Component</span>   
-    </div>
-  </div>
-
-  <div class="mfe-company-border mfe-company-rounded-xl mfe-company-bg-white">
-    <div class="mfe-company-relative mfe-company-aspect-[16/4] mfe-company-p-3">
-      <div class="mfe-company-text-center mfe-company-text-gray-500 mfe-company-text-lg">
-        <span>Welcome to your company home page! Here you can manage your company's activities and updates.</span>
-      </div>   
-    </div>
-  </div>
-  `
+  <mfe-company-overview (onChangeTab)="onChangeTab('About')" overview="We are looking for a skilled Software Engineer to join our dynamic team. The ideal candidate will have experience in developing high-quality software solutions and a passion for technology."></mfe-company-overview>
+  
+  `,
+  imports: [OverviewComponent]
 })
-export class HomeShellComponent implements OnInit {
+export class HomeShellComponent {
 
-  constructor() { }
+  #router = inject(Router);
+  #route = inject(ActivatedRoute);
 
-  ngOnInit() {
+  onChangeTab(tab: string) {
+    this.#router.navigate([], {
+      relativeTo: this.#route,
+      queryParams: { tab },
+      queryParamsHandling: 'merge',
+    });
   }
 
 }

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
     host: { class: 'mfe-company-w-full' },
     template: `
     <div class="mfe-company-border mfe-company-rounded-xl mfe-company-bg-white">
-    <div class="mfe-company-relative mfe-company-aspect-[16/4] mfe-company-p-4">
+    <div class="mfe-company-relative mfe-company-aspect-[16/4] mfe-company-p-4 mfe-company-space-y-4">
       <ng-content></ng-content>
     </div>
   </div>

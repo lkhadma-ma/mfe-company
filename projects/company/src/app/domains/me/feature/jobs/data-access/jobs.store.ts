@@ -51,6 +51,7 @@ export class JobsStore {
             }
         });
     }
+
     delete(jobId: string) {
         this.http.delete(`${this.apiUrl}/${jobId}`).subscribe({
             next: () => {
@@ -63,6 +64,7 @@ export class JobsStore {
             }
         });
     }
+
     update(job: Job) {
         this.http.put<Job>(this.apiUrl, job).subscribe({
             next: (updatedJob) => {
@@ -82,4 +84,26 @@ export class JobsStore {
             }
         });
     }
+
+    search(query: string) {
+        const q = query.toLowerCase();
+      
+        const sortedJobs = this.jobsSignal().sort((a, b) => {
+          const aMatch =
+            a.position.toLowerCase().includes(q) ||
+            a.description.toLowerCase().includes(q) ||
+            a.location.toLowerCase().includes(q);
+      
+          const bMatch =
+            b.position.toLowerCase().includes(q) ||
+            b.description.toLowerCase().includes(q) ||
+            b.location.toLowerCase().includes(q);
+      
+          if (aMatch === bMatch) return 0;
+          return aMatch ? -1 : 1;
+        });
+      
+        this.jobsSignal.set([...sortedJobs]);
+    }
+      
 }

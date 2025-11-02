@@ -5,21 +5,30 @@ import { JobsStore } from '../data-access/jobs.store';
 import { Job, JobView } from '../data-access/job';
 import { PlusComponent } from "@shared/ui/plus/plus.component";
 import { FormJobComponent } from "../ui/form-job.component";
-import { TrashComponent } from "@shared/ui/trash/trash.component";
+import { SearchBoxComponent } from "../ui/search-box.component";
+import { SearchComponent } from "@shared/ui/search/search.component";
 
 @Component({
   selector: 'mfe-company-jobs-shell',
   host: { class: 'mfe-company-w-full mfe-company-space-y-4' },
   template: `
   <mfe-company-section>
-      <h1 class="mfe-user-font-semibold mfe-user-tracking-wide sm:mfe-user-text-xl mfe-user-mb-7 mfe-user-flex mfe-user-justify-between">
-        Jobs
-        @if(isCurrentCompany()) {
+    <h1 class="mfe-user-font-semibold mfe-user-tracking-wide sm:mfe-user-text-xl mfe-user-mb-5 mfe-user-flex mfe-user-justify-between">
+      Jobs
+      @if(isCurrentCompany()) {
+        <div class="mfe-company-flex mfe-company-items-center mfe-company-gap-4">
+          <mfe-company-search
+            (click)="toggleIsSearchingActive()"
+          ></mfe-company-search>
           <mfe-company-plus
             (click)="currentJob.set(null);form.openJobModal()"
           ></mfe-company-plus>
-        }
-      </h1>
+        </div>
+      }
+    </h1>
+    @if(isSearchingActive()){
+      <mfe-company-search-box (onchange)="onSearch($event)"></mfe-company-search-box>
+    }
     <div class="mfe-company-mx-auto mfe-company-relative mfe-company-aspect-[16/4] mfe-company-gap-4 mfe-company-flex mfe-company-flex-wrap">
       @for (job of jobs(); track $index) {
         <mfe-company-job 
@@ -43,7 +52,7 @@ import { TrashComponent } from "@shared/ui/trash/trash.component";
     ></mfe-company-form-job>
   }
   `,
-  imports: [SectionComponent, JobComponent, PlusComponent, FormJobComponent]
+  imports: [SectionComponent, JobComponent, PlusComponent, FormJobComponent, SearchBoxComponent, SearchComponent]
 })
 export class JobsShellComponent implements OnInit {
 
@@ -53,6 +62,7 @@ export class JobsShellComponent implements OnInit {
 
   @ViewChild(FormJobComponent) form!: FormJobComponent;
   currentJob = signal<Job | null>(null);
+  isSearchingActive = signal<boolean>(false);
 
   jobs = this.jobsStore.jobs;
   company = this.jobsStore.company;
@@ -70,6 +80,10 @@ export class JobsShellComponent implements OnInit {
     };
   }
 
+  toggleIsSearchingActive() {
+    this.isSearchingActive.set(!this.isSearchingActive());
+  }
+
   updateJob(job: Job) {
     this.jobsStore.update(job);
     this.form.onModalClosed();
@@ -77,5 +91,9 @@ export class JobsShellComponent implements OnInit {
 
   deleteJob(jobId: string) {
     this.jobsStore.delete(jobId);
+  }
+
+  onSearch(query: string) {
+    this.jobsStore.search(query);
   }
 }

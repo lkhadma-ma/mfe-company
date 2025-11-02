@@ -42,6 +42,7 @@ export class AboutShellComponent implements OnInit {
   @ViewChild(FormAboutComponent) form!: FormAboutComponent;
 
   ngOnInit() {
+    this.aboutStore.loadAbout();
   }
 
   updateAbout(data: About) {

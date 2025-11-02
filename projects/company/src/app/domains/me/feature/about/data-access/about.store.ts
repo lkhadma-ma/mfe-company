@@ -9,19 +9,12 @@ import { CompanySize } from "./company-size";
     providedIn: 'root'
 })
 export class AboutStore {
-    private apiUrl = 'http://localhost:8083/api/v1/about';
+    private apiUrl = 'http://localhost:8083/mbe-company/api/v1/about';
 
     private http = inject(AuthHttpService);
     private alert = inject(AlertService);
     
-    private aboutSegnal = signal<About | null>({
-        overview: "we are a company that values excellence and innovation. Our mission is to provide top-notch services to our clients while fostering a collaborative and inclusive work environment for our employees.",
-        website: "https://www.examplecompany.com",
-        industry: "Information Technology",
-        companySize: CompanySize["201-500"],
-        founded: "2010",
-        specialties: "Software Development, Cloud Computing, AI Solutions"
-    });
+    private aboutSegnal = signal<About | null>(null);
 
     about = this.aboutSegnal.asReadonly();
 

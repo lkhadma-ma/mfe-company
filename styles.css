@@ -17,6 +17,9 @@
 .mfe-company-inset-0 {
   inset: 0px;
 }
+.-mfe-company-bottom-\[2px\] {
+  bottom: -2px;
+}
 .mfe-company-left-1 {
   left: 0.25rem;
 }
@@ -113,6 +116,9 @@
 }
 .mfe-company-hidden {
   display: none;
+}
+.mfe-company-aspect-\[16\/3\] {
+  aspect-ratio: 16/3;
 }
 .mfe-company-aspect-\[16\/4\] {
   aspect-ratio: 16/4;
@@ -253,6 +259,11 @@
 }
 .mfe-company-gap-4 {
   gap: 1rem;
+}
+.mfe-company-space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .mfe-company-space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -481,6 +492,13 @@
 .mfe-company-text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+.mfe-company-text-\[10px\] {
+  font-size: 10px;
+}
+.mfe-company-text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .mfe-company-text-lg {
   font-size: 1.125rem;

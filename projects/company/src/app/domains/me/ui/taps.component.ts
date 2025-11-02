@@ -37,7 +37,7 @@ export class ContentComponent {
   imports: [CommonModule],
   template: `
 <div class="mfe-company-border mfe-company-rounded-lg mfe-company-bg-white">
-  <div class="mfe-company-px-4 mfe-company-py-4 mfe-company-space-y-2">
+  <div class="mfe-company-px-4 mfe-company-pt-4 mfe-company-space-y-2">
     <div class="mfe-company-border-b mfe-company-border-gray-200">
       <nav class="mfe-company-flex mfe-company-space-x-8 mfe-company-overflow-x-auto mfe-company-no-scrollbar">
         <button

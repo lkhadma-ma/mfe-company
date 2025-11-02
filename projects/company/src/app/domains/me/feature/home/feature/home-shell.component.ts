@@ -1,5 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { SectionComponent } from "../ui/section.component";
+import { Component, inject } from '@angular/core';
 import { OverviewComponent } from "../ui/overview.component";
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecentJobOpeningsComponent } from "../ui/recent-job-openings.component";

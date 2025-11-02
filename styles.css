@@ -456,10 +456,6 @@
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
-.mfe-company-py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
 .mfe-company-py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -472,6 +468,9 @@
 }
 .mfe-company-pt-2 {
   padding-top: 0.5rem;
+}
+.mfe-company-pt-4 {
+  padding-top: 1rem;
 }
 .mfe-company-text-center {
   text-align: center;

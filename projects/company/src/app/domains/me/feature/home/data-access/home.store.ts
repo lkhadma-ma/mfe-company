@@ -25,7 +25,7 @@ export class HomeStore {
                 this.homeSegnal.set(data);
             },
             error: () => {
-                this.alert.show("We couldn't load overview Information", 'error');
+                this.homeSegnal.set(null);
             }
         });
     }

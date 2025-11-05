@@ -24,7 +24,7 @@ export class AboutStore {
                 this.aboutSegnal.set(data);
             },
             error: () => {
-                this.alert.show("We couldn't load About Information", 'error');
+                this.aboutSegnal.set(null);
             }
         });
     }

@@ -34,7 +34,6 @@ export class CompanyStore {
         () => {
             this.companySignal.set(null);
             this.isCurrentCompanySignal.set(false);
-            this.alert.show("We couldn't load Company Profile", 'error');
         }
         );
     }

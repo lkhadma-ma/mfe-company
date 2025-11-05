@@ -19,7 +19,7 @@ export class JobsStore {
                 this.jobsSignal.set(data);
             },
             error: () => {
-                this.alert.show("We couldn't load Jobs", 'error');
+                this.jobsSignal.set([]);
             }
         });
     }

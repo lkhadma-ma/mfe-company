@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, inject, input, signal } from '@angular/co
 import { SectionComponent } from "./../ui/section.component";
 import { JobComponent } from "../ui/job.component";
 import { JobsStore } from '../data-access/jobs.store';
-import { Job, JobView } from '../data-access/job';
+import { Job } from '../data-access/job';
 import { PlusComponent } from "@shared/ui/plus/plus.component";
 import { FormJobComponent } from "../ui/form-job.component";
 import { SearchBoxComponent } from "../ui/search-box.component";
@@ -32,7 +32,7 @@ import { SearchComponent } from "@shared/ui/search/search.component";
     <div class="mfe-company-mx-auto mfe-company-relative mfe-company-aspect-[16/4] mfe-company-gap-4 mfe-company-flex mfe-company-flex-wrap">
       @for (job of jobs(); track $index) {
         <mfe-company-job 
-        [jobView]="buildJobView(job)" 
+        [jobView]="job" 
         (onEdit)="currentJob.set(job);form.openJobModal()"
         (onDelete)="deleteJob(job.id)"
         [isCurrentCompany]="isCurrentCompany()">
@@ -65,19 +65,10 @@ export class JobsShellComponent implements OnInit {
   isSearchingActive = signal<boolean>(false);
 
   jobs = this.jobsStore.jobs;
-  company = this.jobsStore.company;
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  buildJobView(job: Job): JobView {
-    const company = this.company()!;
-    return {
-      ...job,
-      company
-    };
   }
 
   toggleIsSearchingActive() {

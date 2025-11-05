@@ -12,17 +12,9 @@ export type Job = {
         label: string;
         value: string;
     }[];
-};
-
-export type JobWithCompany = {
-    jobs: Job[];
-    company: {
-        avatar: string;
-    };
-}
-
-export type JobView = Pick<Job, 'id' | 'position' | 'locationType' | 'description'> & {
     company: {
         avatar: string;
     };
 };
+
+export type JobView = Pick<Job, 'id' | 'position' | 'locationType' | 'description' | 'company'>

@@ -9,7 +9,7 @@ import { CompanySize } from "./company-size";
     providedIn: 'root'
 })
 export class AboutStore {
-    private apiUrl = 'http://localhost:8083/mbe-company/api/v1/about';
+    private apiUrl = 'http://localhost:8083/mbe-company/api/v1/abouts';
 
     private http = inject(AuthHttpService);
     private alert = inject(AlertService);
@@ -18,8 +18,8 @@ export class AboutStore {
 
     about = this.aboutSegnal.asReadonly();
 
-    loadAbout() {
-        this.http.get<About>(this.apiUrl).subscribe({
+    loadAbout(username: string) {
+        this.http.get<About>(`${this.apiUrl}/${username}`).subscribe({
             next: (data) => {
                 this.aboutSegnal.set(data);
             },

@@ -7,6 +7,7 @@ import { PlusComponent } from "@shared/ui/plus/plus.component";
 import { FormJobComponent } from "../ui/form-job.component";
 import { SearchBoxComponent } from "../ui/search-box.component";
 import { SearchComponent } from "@shared/ui/search/search.component";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'mfe-company-jobs-shell',
@@ -38,7 +39,7 @@ import { SearchComponent } from "@shared/ui/search/search.component";
         [isCurrentCompany]="isCurrentCompany()">
         </mfe-company-job>
       }@empty {
-        <div class="mfe-company-text-center mfe-company-py-8 mfe-company-text-gray-500">
+        <div class="mfe-company-w-full mfe-company-flex mfe-company-justify-center mfe-company-text-center mfe-company-py-8 mfe-company-text-gray-500">
           <p>No Jobs details available.</p>
         </div>
       }
@@ -57,7 +58,7 @@ import { SearchComponent } from "@shared/ui/search/search.component";
 export class JobsShellComponent implements OnInit {
 
   private jobsStore = inject(JobsStore);
-
+  private route = inject(ActivatedRoute);
   isCurrentCompany = input<boolean>(false);
 
   @ViewChild(FormJobComponent) form!: FormJobComponent;
@@ -69,6 +70,10 @@ export class JobsShellComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const username = params.get('username')!;
+      this.jobsStore.loadJobs(username);
+    });
   }
 
   toggleIsSearchingActive() {

@@ -4,6 +4,7 @@ import { AboutStore } from '../data-access/about.store';
 import { AboutComponent } from "../ui/about.component";
 import { FormAboutComponent } from "../ui/form-about.component";
 import { About } from '../data-access/about';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'mfe-company-about-shell',
@@ -36,13 +37,17 @@ import { About } from '../data-access/about';
 export class AboutShellComponent implements OnInit {
 
   isCurrentCompany = input<boolean>();
+  private route = inject(ActivatedRoute);
   private aboutStore = inject(AboutStore);
   about = this.aboutStore.about;
 
   @ViewChild(FormAboutComponent) form!: FormAboutComponent;
 
   ngOnInit() {
-    this.aboutStore.loadAbout();
+    this.route.paramMap.subscribe(params => {
+      const username = params.get('username')!;
+      this.aboutStore.loadAbout(username);
+    });
   }
 
   updateAbout(data: About) {

@@ -7,14 +7,14 @@ import { Job } from "./job";
 export class JobsStore {
     private http = inject(AuthHttpService);
     private alert = inject(AlertService);
-    private apiUrl = 'http://localhost:8083/api/v1/mbe-company/jobs';
+    private apiUrl = 'http://localhost:8083/mbe-company/api/v1/jobs';
 
     jobsSignal = signal<Job[]>([]);
 
     jobs = this.jobsSignal.asReadonly();
 
     loadJobs(username: string) {
-        this.http.get<Job[]>(`${this.apiUrl}?=username=${username}`).subscribe({
+        this.http.get<Job[]>(`${this.apiUrl}/${username}`).subscribe({
             next: (data) => {
                 this.jobsSignal.set(data);
             },

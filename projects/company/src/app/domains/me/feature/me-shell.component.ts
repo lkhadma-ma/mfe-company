@@ -14,7 +14,7 @@ import { loadRemoteModule } from '@angular-architects/native-federation';
   selector: 'mfe-company-me-shell',
   imports: [SectionComponent, HeaderComponent, TabsComponent, TapComponent, ContentComponent, HomeShellComponent, AboutShellComponent, JobsShellComponent],
   template: `
-    <app-section ngxClass="md:mfe-company-pt-[5rem] mfe-company-min-h-screen" >
+    <app-section ngxClass="md:mfe-company-pt-[5rem]" >
       <div class="mfe-company-w-full mfe-company-mb-40 md:mfe-company-space-x-6 md:mfe-company-flex">
         <div class="mfe-company-w-full">
           <div class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-4">

@@ -101,6 +101,6 @@ export class JobsShellComponent implements OnInit {
   }
 
   navigateToAppliedJobs(jobId: string) {
-    this.router.navigate(['/lk/applied-jobs'], { queryParams: { currentId: jobId } });
+    this.router.navigate(['/lk/applied-jobs/', jobId]);
   }
 }

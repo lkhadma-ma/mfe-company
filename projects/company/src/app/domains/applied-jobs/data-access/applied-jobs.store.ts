@@ -12,25 +12,16 @@ export class AppliedJobsStore {
                 username: 'oyaagoub5',
                 name: 'Oussama Yaagoub',
                 avatar: 'https://avatars.githubusercontent.com/u/63155454?v=4',
-                about: 'Passionate about technology and software development. Experienced in building web applications using modern frameworks and tools. Always eager to learn and take on new challenges.',
-                headline: 'Full Stack Developer',
-                skills: [
-                    'JavaScript',
-                    'TypeScript',
-                    'Angular',
-                    'React',
-                    'Node.js',
-                    'Express',
-                    'MongoDB',
-                    'SQL',
-                    'HTML',
-                    'CSS'
-                ]
+                headline: 'Frontend Developer'
             },
             pipelineStage: [
                 {
                     status: 'SUBMITTED',
-                    createdAt: new Date().toISOString()
+                    createdAt: '2025-11-26T22:50:12.567+00:00'
+                },
+                {
+                    status: 'VIEWED',
+                    createdAt: '2025-11-26T21:50:12.567+00:00'
                 }
             ]
         }

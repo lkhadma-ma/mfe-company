@@ -3,9 +3,7 @@ export type JobApplication = {
       username: string;
       name: string;
       avatar: string;
-      about: string;
       headline: string;
-      skills: string[];
     };
     pipelineStage: {
         status: JobApplicationStatus;
@@ -15,5 +13,3 @@ export type JobApplication = {
 }
 
 export type JobApplicationStatus = 'SUBMITTED' | 'VIEWED' | 'INTERVIEW' | 'ACCEPTED' | 'REJECTED' | 'PASSED';
-
-export type JobApplicationMessage = 'SUBMITTED' | 'VIEWED';

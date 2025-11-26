@@ -137,7 +137,13 @@ export class ShellAppliedJobsComponent {
       return 'SUBMITTED';
     }
 
-    return app.pipelineStage[app.pipelineStage.length - 1].status;
+    return this.getOrderedTimeline(app)[app.pipelineStage.length - 1].status;
+  }
+
+  private getOrderedTimeline(app: JobApplication) {
+    return [...(app.pipelineStage ?? [])].sort(
+      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+    );
   }
 
   getEmptyStateMessage(): string {

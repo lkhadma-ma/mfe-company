@@ -33,7 +33,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     <div class="mfe-company-mx-auto mfe-company-relative mfe-company-aspect-[16/4] mfe-company-gap-4 mfe-company-flex mfe-company-flex-wrap">
       @for (job of jobs(); track $index) {
         <mfe-company-job 
-        (click)="navigateToAppliedJobs(job.id)"
+        (onGestion)="navigateToAppliedJobs(job.id)"
         [jobView]="job" 
         (onEdit)="currentJob.set(job);form.openJobModal()"
         (onDelete)="deleteJob(job.id)"

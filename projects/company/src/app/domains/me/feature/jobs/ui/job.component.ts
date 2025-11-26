@@ -16,7 +16,7 @@ import { ViewComponent } from "@shared/ui/view/view.component";
 
   @let jobIn = jobView();
   @if (jobIn) {
-    <div class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-2 mfe-company-border mfe-company-rounded-xl mfe-company-bg-white mfe-company-p-4">
+    <div (click)="onGestion.emit()" class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-2 mfe-company-border mfe-company-rounded-xl mfe-company-bg-white mfe-company-p-4">
       <img loading="lazy"
           class=" mfe-company-w-full mfe-company-bg-cover mfe-company-bg-center mfe-company-max-h-[100px] mfe-company-max-w-[100px] mfe-company-rounded-t-md"
           [src]="jobIn.company.avatar"
@@ -36,6 +36,7 @@ export class JobComponent {
   onEdit = output<void>();
   onDelete = output<void>();
   onView = output<void>();
+  onGestion = output<void>();
 
   optionsLocalType = [
     { value: 'REMOTE', label: 'Remote' },

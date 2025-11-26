@@ -7,8 +7,10 @@ module.exports = withNativeFederation({
   exposes: {
       // routes
       './ME_ROUTES':'./projects/company/src/app/domains/me/feature/me.routes.ts',
+      './APPLIED_JOBS_ROUTES':'./projects/company/src/app/domains/applied-jobs/feature/shell-applied-jobs.routes.ts',
       // components
       './MeShellComponent': './projects/company/src/app/domains/me/feature/me-shell.component.ts',
+      
   },
 
   shared: {

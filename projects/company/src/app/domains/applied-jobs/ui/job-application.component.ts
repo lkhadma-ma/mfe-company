@@ -4,9 +4,9 @@ import { JobApplication, JobApplicationMessage, JobApplicationStatus } from '../
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'mfe-user-job-application',
+  selector: 'mfe-company-job-application',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   template: `
 
     @let app = application();
@@ -15,34 +15,33 @@ import { RouterLink } from '@angular/router';
       @let timeline = getOrderedTimeline(app);
       @let latestIndexValue = latestIndex(timeline);
 
-      <div class="mfe-user-bg-white mfe-user-border mfe-user-border-gray-200 mfe-user-rounded-xl mfe-user-shadow-sm mfe-user-overflow-hidden">
+      <div class="mfe-company-bg-white mfe-company-border mfe-company-border-gray-200 mfe-company-rounded-xl mfe-company-shadow-sm mfe-company-overflow-hidden">
 
         <!-- Header -->
         <div (click)="openAccordion.set(!openAccordion())"
-             class="mfe-user-p-6 max-sm:mfe-user-p-2 mfe-user-border-b mfe-user-border-gray-200">
+             class="mfe-company-p-6 max-sm:mfe-company-p-2 mfe-company-border-b mfe-company-border-gray-200">
 
-          <div class="mfe-user-flex mfe-user-items-center mfe-user-gap-4">
+          <div class="mfe-company-flex mfe-company-items-center mfe-company-gap-4">
 
             <!-- Company Avatar -->
-            <img [src]="app.job.company.avatar"
-                 [alt]="app.job.company.name"
-                 class="max-sm:mfe-user-w-8 max-sm:mfe-user-h-8 mfe-user-w-12 mfe-user-h-12 mfe-user-rounded-lg mfe-user-object-cover mfe-user-border mfe-user-border-gray-200">
+            <img [src]="app.user.avatar"
+                 [alt]="app.user.name"
+                 class="max-sm:mfe-company-w-8 max-sm:mfe-company-h-8 mfe-company-w-12 mfe-company-h-12 mfe-company-rounded-full mfe-company-object-cover mfe-company-border mfe-company-border-gray-200">
 
             <!-- Job Info -->
-            <div class="mfe-user-flex-1">
-              <h3 [routerLink]="['/lk/jobs']"
-                  [queryParams]="{ currentId: app.job.id }"
-                  class="mfe-user-cursor-pointer mfe-user-text-sm sm:mfe-user-text-lg mfe-user-font-semibold hover:mfe-user-underline sm:mfe-user-w-max mfe-user-text-gray-900">
-                {{ app.job.position }}
+            <div class="mfe-company-flex-1">
+              <h3 
+                  class="mfe-company-cursor-pointer mfe-company-text-sm sm:mfe-company-text-lg mfe-company-font-semibold sm:mfe-company-w-max mfe-company-text-gray-900">
+                {{ app.user.name }}
               </h3>
-              <p class="mfe-user-text-gray-600 mfe-user-mt-1 mfe-user-text-xs sm:mfe-user-text-md">
-                {{ app.job.company.name }}
+              <p class="mfe-company-text-gray-600 mfe-company-mt-1 mfe-company-text-xs sm:mfe-company-text-md">
+                {{ app.user.headline }}
               </p>
             </div>
 
             <!-- Status Badge -->
             <span [class]="statusBadgeClasses(getLatestStatus(app))"
-                  class="max-424:mfe-user-hidden mfe-user-px-3 mfe-user-py-1 mfe-user-rounded-full mfe-user-text-sm mfe-user-font-medium">
+                  class="max-424:mfe-company-hidden mfe-company-px-3 mfe-company-py-1 mfe-company-rounded-full mfe-company-text-sm mfe-company-font-medium">
               {{ getStatusText(getLatestStatus(app)) }}
             </span>
 
@@ -52,38 +51,38 @@ import { RouterLink } from '@angular/router';
         @if (openAccordion()) {
 
           <!-- Timeline -->
-          <div class="mfe-user-p-6">
-            <div class="mfe-user-relative">
+          <div class="mfe-company-p-6">
+            <div class="mfe-company-relative">
 
               <!-- Vertical line -->
-              <div class="mfe-user-absolute mfe-user-left-[.95rem] mfe-user-top-0 mfe-user-bottom-0 mfe-user-w-0.5 mfe-user-bg-gray-200"></div>
+              <div class="mfe-company-absolute mfe-company-left-[.95rem] mfe-company-top-0 mfe-company-bottom-0 mfe-company-w-0.5 mfe-company-bg-gray-200"></div>
 
-              <div class="mfe-user-space-y-6">
+              <div class="mfe-company-space-y-6">
 
                 @for(stage of timeline; track stage.createdAt) {
 
                   @let index = stageIndex(stage, timeline);
 
-                  <div class="mfe-user-relative mfe-user-flex mfe-user-gap-4">
+                  <div class="mfe-company-relative mfe-company-flex mfe-company-gap-4">
 
                     <!-- Circle / Icon -->
                     <div [class]="getStepClasses(index, latestIndexValue)"
-                         class="mfe-user-w-8 mfe-user-h-8 mfe-user-rounded-full mfe-user-flex mfe-user-items-center mfe-user-justify-center mfe-user-z-10 mfe-user-border-2">
-                      <i class="{{ getIcon(stage.status) }} mfe-user-text-xs"></i>
+                         class="mfe-company-w-8 mfe-company-h-8 mfe-company-rounded-full mfe-company-flex mfe-company-items-center mfe-company-justify-center mfe-company-z-10 mfe-company-border-2">
+                      <i class="{{ getIcon(stage.status) }} mfe-company-text-xs"></i>
                     </div>
 
                     <!-- Content -->
-                    <div class="mfe-user-flex-1 mfe-user-pb-6">
-                      <p class="mfe-user-font-medium mfe-user-text-gray-900">{{ getTitle(stage.status) }}</p>
+                    <div class="mfe-company-flex-1 mfe-company-pb-6">
+                      <p class="mfe-company-font-medium mfe-company-text-gray-900">{{ getTitle(stage.status) }}</p>
                       @if(stage.status === 'SUBMITTED' || stage.status === 'VIEWED') {
-                        <p class="mfe-user-text-sm mfe-user-text-gray-500 mfe-user-mt-1">
+                        <p class="mfe-company-text-sm mfe-company-text-gray-500 mfe-company-mt-1">
                             Your application has been sent
                         </p>
                       } @else {
                            
                         @if(stage?.note) {
-                            <div class="mfe-user-bg-blue-50  mfe-user-border mfe-user-border-blue-200 mfe-user-rounded-lg mfe-user-p-4 mfe-user-mt-4">
-                            <p class="mfe-user-text-sm mfe-user-text-blue-800">{{ stage?.note }}</p>
+                            <div class="mfe-company-bg-blue-50  mfe-company-border mfe-company-border-blue-200 mfe-company-rounded-lg mfe-company-p-4 mfe-company-mt-4">
+                            <p class="mfe-company-text-sm mfe-company-text-blue-800">{{ stage?.note }}</p>
                             </div>
                         }
                       }
@@ -131,12 +130,12 @@ export class JobApplicationComponent {
   /** Step highlight classes */
   getStepClasses(stepIndex: number, latestIndex: number): string {
     if (stepIndex < latestIndex) {
-      return 'mfe-user-bg-green-500 mfe-user-border-green-500 mfe-user-text-white';
+      return 'mfe-company-bg-green-500 mfe-company-border-green-500 mfe-company-text-white';
     }
     if (stepIndex === latestIndex) {
-      return 'mfe-user-bg-white mfe-user-border-green-500 mfe-user-text-green-500';
+      return 'mfe-company-bg-white mfe-company-border-green-500 mfe-company-text-green-500';
     }
-    return 'mfe-user-bg-gray-100 mfe-user-border-gray-300 mfe-user-text-gray-400';
+    return 'mfe-company-bg-gray-100 mfe-company-border-gray-300 mfe-company-text-gray-400';
   }
 
   /** Map status to icons */
@@ -177,14 +176,14 @@ export class JobApplicationComponent {
 
   /** Badge classes */
   statusBadgeClasses(status: JobApplicationStatus): string {
-    const base = 'mfe-user-px-3 mfe-user-py-1 mfe-user-rounded-full mfe-user-text-sm mfe-user-font-medium';
+    const base = 'mfe-company-px-3 mfe-company-py-1 mfe-company-rounded-full mfe-company-text-sm mfe-company-font-medium';
     const map = {
-      SUBMITTED: 'mfe-user-bg-blue-100 mfe-user-text-blue-800',
-      VIEWED: 'mfe-user-bg-purple-100 mfe-user-text-purple-800',
-      INTERVIEW: 'mfe-user-bg-yellow-100 mfe-user-text-yellow-800',
-      ACCEPTED: 'mfe-user-bg-green-100 mfe-user-text-green-800',
-      REJECTED: 'mfe-user-bg-red-100 mfe-user-text-red-800',
-      PASSED: 'mfe-user-bg-teal-100 mfe-user-text-teal-800',
+      SUBMITTED: 'mfe-company-bg-blue-100 mfe-company-text-blue-800',
+      VIEWED: 'mfe-company-bg-purple-100 mfe-company-text-purple-800',
+      INTERVIEW: 'mfe-company-bg-yellow-100 mfe-company-text-yellow-800',
+      ACCEPTED: 'mfe-company-bg-green-100 mfe-company-text-green-800',
+      REJECTED: 'mfe-company-bg-red-100 mfe-company-text-red-800',
+      PASSED: 'mfe-company-bg-teal-100 mfe-company-text-teal-800',
     };
     return `${base} ${map[status]}`;
   }

@@ -23,26 +23,26 @@ import { JobApplicationComponent } from "../ui/job-application.component";
           <!-- start -->
           <div class="max-sm:mfe-company-h-[90vh] max-sm:mfe-company-border sm:mfe-company-rounded-lg mfe-company-bg-white">
             <div class="mfe-company-px-4 mfe-company-py-4 mfe-company-space-y-4">
-              <div class="mfe-user-space-y-2">
-                  <h2 class="mfe-user-text-2xl mfe-user-font-semibold mfe-user-text-gray-900">
+              <div class="mfe-company-space-y-2">
+                  <h2 class="mfe-company-text-2xl mfe-company-font-semibold mfe-company-text-gray-900">
                     job Applications
                   </h2>
-                  <p class="mfe-user-text-gray-600 mfe-user-text-sm">
+                  <p class="mfe-company-text-gray-600 mfe-company-text-sm">
                     Manage and review the applications submitted by candidates for your job postings.
                   </p>
               </div>
 
 
               <!-- Filter Tabs -->
-              <div class="mfe-user-flex mfe-user-gap-2 mfe-user-overflow-x-auto mfe-user-pb-2">
+              <div class="mfe-company-flex mfe-company-gap-2 mfe-company-overflow-x-auto mfe-company-pb-2">
                 <button
                   *ngFor="let filter of statusFilters"
                   (click)="setStatusFilter(filter.value)"
                   [class]="getFilterButtonClasses(filter.value)"
-                  class="mfe-user-px-4 mfe-user-py-2 mfe-user-rounded-lg mfe-user-text-sm mfe-user-font-medium mfe-user-transition mfe-user-duration-200 mfe-user-whitespace-nowrap"
+                  class="mfe-company-px-4 mfe-company-py-2 mfe-company-rounded-lg mfe-company-text-sm mfe-company-font-medium mfe-company-transition mfe-company-duration-200 mfe-company-whitespace-nowrap"
                 >
                   {{ filter.label }}
-                  <span class="mfe-user-ml-1 mfe-user-text-xs mfe-user-opacity-70">
+                  <span class="mfe-company-ml-1 mfe-company-text-xs mfe-company-opacity-70">
                     ({{ getApplicationCount(filter.value) }})
                   </span>
                 </button>
@@ -51,28 +51,28 @@ import { JobApplicationComponent } from "../ui/job-application.component";
               <!-- Applications List -->
               <div class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-4">
               @if(applications() === null) {
-                  <mfe-user-loading />
+                  <mfe-company-loading />
                 } @else if (applications()!.length > 0) {
-                  @for(app of filteredApplications(); track app.job.id) {
-                    <mfe-user-job-application [application]="app" />
+                  @for(app of filteredApplications(); track app.user) {
+                    <mfe-company-job-application [application]="app" />
                   } @empty {
-                    <div class="mfe-user-text-center mfe-user-py-12 mfe-user-text-gray-500">
-                      <i class="fa-solid fa-briefcase mfe-user-text-4xl mfe-user-mb-4 mfe-user-text-gray-300"></i>
-                      <p class="mfe-user-text-lg">
+                    <div class="mfe-company-text-center mfe-company-py-12 mfe-company-text-gray-500">
+                      <i class="fa-solid fa-briefcase mfe-company-text-4xl mfe-company-mb-4 mfe-company-text-gray-300"></i>
+                      <p class="mfe-company-text-lg">
                         {{ getEmptyStateMessage() }}
                       </p>
-                      <p class="mfe-user-text-sm mfe-user-mt-1">
+                      <p class="mfe-company-text-sm mfe-company-mt-1">
                         Applications with this status will appear here
                       </p>
                   </div>
                   }
                 } @else {
-                  <div class="mfe-user-text-center mfe-user-py-12 mfe-user-text-gray-500">
-                      <i class="fa-solid fa-briefcase mfe-user-text-4xl mfe-user-mb-4 mfe-user-text-gray-300"></i>
-                      <p class="mfe-user-text-lg">
+                  <div class="mfe-company-text-center mfe-company-py-12 mfe-company-text-gray-500">
+                      <i class="fa-solid fa-briefcase mfe-company-text-4xl mfe-company-mb-4 mfe-company-text-gray-300"></i>
+                      <p class="mfe-company-text-lg">
                         {{ getEmptyStateMessage() }}
                       </p>
-                      <p class="mfe-user-text-sm mfe-user-mt-1">
+                      <p class="mfe-company-text-sm mfe-company-mt-1">
                         Applications with this status will appear here
                       </p>
                   </div>
@@ -118,13 +118,13 @@ export class ShellAppliedJobsComponent {
   getFilterButtonClasses(filter: any): string {
     const isActive = this.statusFilter() === filter;
     const baseClasses =
-      'mfe-user-px-4 mfe-user-py-2 mfe-user-rounded-lg mfe-user-text-sm mfe-user-font-medium mfe-user-transition mfe-user-duration-200 mfe-user-whitespace-nowrap';
+      'mfe-company-px-4 mfe-company-py-2 mfe-company-rounded-lg mfe-company-text-sm mfe-company-font-medium mfe-company-transition mfe-company-duration-200 mfe-company-whitespace-nowrap';
 
     if (isActive) {
-      return `${baseClasses} mfe-user-bg-blue-100 mfe-user-text-blue-700 mfe-user-border mfe-user-border-blue-200`;
+      return `${baseClasses} mfe-company-bg-blue-100 mfe-company-text-blue-700 mfe-company-border mfe-company-border-blue-200`;
     }
 
-    return `${baseClasses} mfe-user-bg-gray-100 mfe-user-text-gray-700 mfe-user-border mfe-user-border-transparent hover:mfe-user-bg-gray-200`;
+    return `${baseClasses} mfe-company-bg-gray-100 mfe-company-text-gray-700 mfe-company-border mfe-company-border-transparent hover:mfe-company-bg-gray-200`;
   }
 
   getApplicationCount(filter: any): number {

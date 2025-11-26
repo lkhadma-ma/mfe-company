@@ -1,11 +1,11 @@
 export type JobApplication = {
-    job: {
-      id: number;
-      position: string;
-      company: {
-        name: string;
-        avatar: string;
-      };
+    user: {
+      username: string;
+      name: string;
+      avatar: string;
+      about: string;
+      headline: string;
+      skills: string[];
     };
     pipelineStage: {
         status: JobApplicationStatus;

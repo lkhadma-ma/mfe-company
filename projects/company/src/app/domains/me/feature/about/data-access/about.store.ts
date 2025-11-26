@@ -2,8 +2,6 @@ import { Injectable, inject, signal } from "@angular/core";
 import { AuthHttpService } from "@shared/auth/auth-http.service";
 import { About } from "./about";
 import { AlertService } from "@shared/commun/alert.service";
-import { CompanySize } from "./company-size";
-
 
 @Injectable({
     providedIn: 'root'

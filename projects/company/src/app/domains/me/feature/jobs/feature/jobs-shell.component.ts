@@ -7,7 +7,7 @@ import { PlusComponent } from "@shared/ui/plus/plus.component";
 import { FormJobComponent } from "../ui/form-job.component";
 import { SearchBoxComponent } from "../ui/search-box.component";
 import { SearchComponent } from "@shared/ui/search/search.component";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'mfe-company-jobs-shell',
@@ -36,6 +36,7 @@ import { ActivatedRoute } from '@angular/router';
         [jobView]="job" 
         (onEdit)="currentJob.set(job);form.openJobModal()"
         (onDelete)="deleteJob(job.id)"
+        (onView)="navigateToJobDetail(job.id)"
         [isCurrentCompany]="isCurrentCompany()">
         </mfe-company-job>
       }@empty {
@@ -58,6 +59,7 @@ import { ActivatedRoute } from '@angular/router';
 export class JobsShellComponent implements OnInit {
 
   private jobsStore = inject(JobsStore);
+  private router = inject(Router);
   private route = inject(ActivatedRoute);
   isCurrentCompany = input<boolean>(false);
 
@@ -91,5 +93,9 @@ export class JobsShellComponent implements OnInit {
 
   onSearch(query: string) {
     this.jobsStore.search(query);
+  }
+
+  navigateToJobDetail(jobId: string) {
+    this.router.navigate(['/lk/jobs'], { queryParams: { currentId: jobId } });
   }
 }

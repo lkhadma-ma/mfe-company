@@ -2,10 +2,12 @@ import { Injectable, inject, signal } from "@angular/core";
 import { AuthHttpService } from "@shared/auth/auth-http.service";
 import { AlertService } from "@shared/commun/alert.service";
 import { Job } from "./job";
+import { ConfirmationService } from "@shared/commun/confirmation/confirmation.service";
 
 @Injectable({ providedIn: 'root' })
 export class JobsStore {
     private http = inject(AuthHttpService);
+    private confirmationService = inject(ConfirmationService);
     private alert = inject(AlertService);
     private apiUrl = 'http://localhost:8083/mbe-company/api/v1/jobs';
 
@@ -25,6 +27,18 @@ export class JobsStore {
     }
 
     delete(jobId: string) {
+        this.confirmationService
+        .confirmDelete('this job', 'job')
+        .subscribe({
+            next: (confirmed) => {
+                if (confirmed) {
+                    this._delete(jobId);
+                }
+            }
+        })
+    }
+    
+    _delete(jobId: string) {
         this.http.delete(`${this.apiUrl}/${jobId}`).subscribe({
             next: () => {
                 const updatedJobs = this.jobsSignal().filter(job => job.id !== jobId);

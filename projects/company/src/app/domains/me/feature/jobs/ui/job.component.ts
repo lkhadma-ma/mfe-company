@@ -2,6 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { JobView } from '../data-access/job';
 import { PencilComponent } from "@shared/ui/pencil/pencil.component";
 import { TrashComponent } from "@shared/ui/trash/trash.component";
+import { ViewComponent } from "@shared/ui/view/view.component";
 
 @Component({
   selector: 'mfe-company-job',
@@ -10,6 +11,7 @@ import { TrashComponent } from "@shared/ui/trash/trash.component";
   @if(isCurrentCompany()) {
     <mfe-company-pencil (click)="onEdit.emit()"></mfe-company-pencil>
     <mfe-company-trash (click)="onDelete.emit()"></mfe-company-trash>
+    <mfe-company-view (click)="onView.emit()"></mfe-company-view>
   }
 
   @let jobIn = jobView();
@@ -26,13 +28,14 @@ import { TrashComponent } from "@shared/ui/trash/trash.component";
     </div>
   }
   `,
-  imports: [PencilComponent, TrashComponent]
+  imports: [PencilComponent, TrashComponent, ViewComponent]
 })
 export class JobComponent {
   jobView = input<JobView>();
   isCurrentCompany = input<boolean>(false);
   onEdit = output<void>();
   onDelete = output<void>();
+  onView = output<void>();
 
   optionsLocalType = [
     { value: 'REMOTE', label: 'Remote' },

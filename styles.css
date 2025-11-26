@@ -210,6 +210,9 @@
 .mfe-company-max-w-2xl {
   max-width: 42rem;
 }
+.mfe-company-max-w-6xl {
+  max-width: 72rem;
+}
 .mfe-company-max-w-\[100px\] {
   max-width: 100px;
 }
@@ -772,6 +775,9 @@
   .md\:mfe-company-grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  .md\:mfe-company-flex-row {
+    flex-direction: row;
+  }
   .md\:mfe-company-space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
@@ -784,6 +790,9 @@
 @media (min-width: 1024px) {
   .lg\:mfe-company-block {
     display: block;
+  }
+  .lg\:mfe-company-flex {
+    display: flex;
   }
 }
 

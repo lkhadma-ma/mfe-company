@@ -485,6 +485,10 @@
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
+.mfe-company-py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .mfe-company-py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -747,13 +751,22 @@
   .max-sm\:mfe-company-h-\[5rem\] {
     height: 5rem;
   }
+  .max-sm\:mfe-company-h-\[90vh\] {
+    height: 90vh;
+  }
   .max-sm\:mfe-company-w-\[5rem\] {
     width: 5rem;
+  }
+  .max-sm\:mfe-company-border {
+    border-width: 1px;
   }
 }
 @media (min-width: 640px) {
   .sm\:mfe-company-w-\[16rem\] {
     width: 16rem;
+  }
+  .sm\:mfe-company-rounded-lg {
+    border-radius: 0.5rem;
   }
   .sm\:mfe-company-text-2xl {
     font-size: 1.5rem;

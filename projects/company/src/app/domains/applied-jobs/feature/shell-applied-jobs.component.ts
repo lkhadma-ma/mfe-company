@@ -15,7 +15,15 @@ import { SectionComponent } from "@shared/ui/section/section.component";
         <div class="mfe-company-w-full">
           <div class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-4">
           <!-- start -->
-          
+          <div class="max-sm:mfe-company-h-[90vh] max-sm:mfe-company-border sm:mfe-company-rounded-lg mfe-company-bg-white">
+            <div class="mfe-company-px-4 mfe-company-py-4 mfe-company-space-y-4">
+              <!-- Header -->
+              <!-- Applications List -->
+              <div class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-4">
+
+              </div>
+            </div>
+          </div>
           <!-- fin -->
           </div>
         </div>

@@ -1,40 +1,49 @@
 const fs = require('fs');
 const path = require('path');
 
-const distPath = 'dist/company/browser';
+const distPath = path.join(__dirname, '..', 'dist', 'company', 'browser');
 const manifestPath = path.join(distPath, 'styles-manifest.json');
 
 /**
- * 
- * @param {string} directory 
- * @returns file name of styles file
- * 
+ * Safely read a directory. Returns null if folder does not exist or is locked.
  */
-function findStylesFile(directory) {
-  const files = fs.readdirSync(directory);
-  const stylesFile = files.find(file => file.startsWith('styles') && file.endsWith('.css'));
-  return stylesFile;
+function safeReadDir(directory) {
+  try {
+    if (!fs.existsSync(directory)) return null;
+    return fs.readdirSync(directory);
+  } catch (err) {
+    return null; // folder is locked or not ready yet
+  }
 }
 
 /**
- * this function generates a styles-manifest.json file in the dist directory
- * by finding the styles file and writing its name to the manifest.
- * @returns void
+ * Returns the name of the first styles file in the directory, or null if none exists.
+ */
+function findStylesFile(directory) {
+  const files = safeReadDir(directory);
+  if (!files) return null;
+  return files.find(file => file.startsWith('styles') && file.endsWith('.css'));
+}
+
+/**
+ * Generates styles-manifest.json in dist.
  */
 function generateStylesManifest() {
   const stylesFileName = findStylesFile(distPath);
 
   if (!stylesFileName) {
-    console.error('Styles file not found in the output directory.');
+    console.log('[Manifest] Styles file not ready yet. Skipping...');
     return;
   }
 
-  const manifestData = {
-    styles: stylesFileName
-  };
+  const manifestData = { styles: stylesFileName };
 
-  fs.writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2), 'utf-8');
-  console.log(`Successfully generated styles-manifest.json at ${manifestPath}`);
+  try {
+    fs.writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2), 'utf-8');
+    console.log(`[Manifest] Successfully generated styles-manifest.json at ${manifestPath}`);
+  } catch (err) {
+    console.error('[Manifest] Failed to write manifest:', err.message);
+  }
 }
 
 generateStylesManifest();

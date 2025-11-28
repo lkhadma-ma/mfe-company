@@ -9,9 +9,9 @@
     "build:cdn": "mkdir -p dist/company/browser/assets && cp -R projects/company/public/* dist/company/browser/assets",
 
     "build:styles-manifest": "node ./scripts/generate-styles-manifest.js",
-    "watch:styles-manifest": "chokidar \"dist/company/browser/styles*.css\" -c \"node ./scripts/generate-styles-manifest.js\"",
-    "watch": "concurrently \"ng build company --watch\" \"npm run watch:styles-manifest\"",
-    "serve": "concurrently \"npm run watch\" \"browser-sync start --server dist/company/browser --files dist/company/browser --port 4207 --no-open\""
+    "watch:styles-manifest": "chokidar \"dist/company/browser/styles*.css\" -c \"node ./scripts/generate-styles-manifest.js\"  --await-write-finish",
+    "watch": "concurrently \"ng build company --watch\" \"npm run watch:styles-manifest\" --names \"NG,STYLE\" --prefix-colors \"blue,magenta\" --await-write-finish",
+    "serve": "node scripts/serve.js"
   },
   "prettier": {
     "overrides": [

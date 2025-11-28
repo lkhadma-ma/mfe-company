@@ -178,5 +178,5 @@ function processHostInfo(hostInfo, relBundlesPath = "./") {
 }
 
 // projects/company/src/main.ts
-initFederation().catch((err) => console.error(err)).then((_) => import("./chunk-PGJLEDOH.js")).catch((err) => console.error(err));
+initFederation().catch((err) => console.error(err)).then((_) => import("./chunk-ZSTHVLJY.js")).catch((err) => console.error(err));
 //# sourceMappingURL=main.js.map

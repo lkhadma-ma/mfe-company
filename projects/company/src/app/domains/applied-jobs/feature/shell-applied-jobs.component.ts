@@ -1,7 +1,7 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SectionComponent } from "@shared/ui/section/section.component";
-import { JobApplication, JobApplicationStatus } from '../data-access/job-application';
+import { JobApplication, JobApplicationStatus, NewPipelineStage, PipelineStage } from '../data-access/job-application';
 import { AppliedJobsStore } from '../data-access/applied-jobs.store';
 import { LoadingUsersComponent } from "../ui/loading-users.component";
 import { JobApplicationComponent } from "../ui/job-application.component";
@@ -56,7 +56,7 @@ import { filter } from 'rxjs';
                   <mfe-company-loading-users />
                 } @else if (applications()!==null && applications()!.length > 0) {
                   @for(app of filteredApplications(); track app.user) {
-                    <mfe-company-job-application [application]="app" (loadUserInfoEvent)="loadUserInfoEvent($event)" [user]="user()" />
+                    <mfe-company-job-application (onSubmitStatusChange)="onSubmitStatusChange($event)" [application]="app" (loadUserInfoEvent)="loadUserInfoEvent($event)" [user]="user()" />
                   } @empty {
                     <div class="mfe-company-text-center mfe-company-py-12 mfe-company-text-gray-500">
                       <i class="fa-solid fa-briefcase mfe-company-text-4xl mfe-company-mb-4 mfe-company-text-gray-300"></i>
@@ -161,7 +161,7 @@ export class ShellAppliedJobsComponent implements OnInit{
 
   private getOrderedTimeline(app: JobApplication) {
     return [...(app.pipelineStage ?? [])].sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      (a, b) => new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime()
     );
   }
 
@@ -182,6 +182,11 @@ export class ShellAppliedJobsComponent implements OnInit{
 
   loadUserInfoEvent(username: string) {
     this.appliedJobsStore.loadUserInfo(username);
+  }
+
+  onSubmitStatusChange({jobApplicationId, pipelineStage}: {jobApplicationId: number, pipelineStage: NewPipelineStage}) {
+    this.appliedJobsStore.changeStatusApplication(jobApplicationId, pipelineStage);
+    
   }
 
 }

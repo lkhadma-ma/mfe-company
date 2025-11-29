@@ -1,14 +1,15 @@
 import { Component, computed, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JobApplication } from '../data-access/job-application';
+import { JobApplication, JobApplicationStatus, NewPipelineStage, PipelineStage } from '../data-access/job-application';
 import { LoadingUserComponent } from "./loading-user.component";
 import { MarkdownPipe } from '@shared/pipe/markdown.pipe';
 import { User } from '../data-access/user';
+import { FormStatusComponent } from "./form-status.component";
 
 @Component({
   selector: 'mfe-company-job-application',
   standalone: true,
-  imports: [CommonModule, LoadingUserComponent, MarkdownPipe],
+  imports: [CommonModule, LoadingUserComponent, MarkdownPipe, FormStatusComponent],
   template: `
 
     @let app = application();
@@ -70,14 +71,14 @@ import { User } from '../data-access/user';
               </h1>
               <div class="mfe-company-flex mfe-company-items-center mfe-company-gap-4 mfe-company-mb-4 mfe-company-text-gray-600 mfe-company-text-sm">
                 <i class="fa-solid fa-phone mfe-company-mr-2 mfe-company-text-gray-500"></i>
-                <span>+{{user()?.phone ?? '212 xxx xxx xxx'}}</span>
+                <span>+{{user()?.phone}}</span>
               </div>
               <h1 class="mfe-user-font-semibold mfe-user-tracking-wide sm:mfe-user-text-xl mfe-user-mb-4 mfe-user-flex mfe-user-justify-between mfe-company-items-center">
                 <span>About the Candidate</span>
 
-                <a [href]="'/lk/' + application()?.user?.username" target="_blank" class="max-sm:mfe-company-hidden mfe-company-text-gray-600 mfe-company-text-sm mfe-company-font-bold mfe-company-flex mfe-company-items-center mfe-company-gap-1 mfe-company-border-1 mfe-company-rounded-md mfe-company-px-3 mfe-company-py-2 mfe-company-border-gray-300 mfe-company-bg-gray-50 hover:mfe-company-bg-gray-100 mfe-company-max-w-max">
+                <span class="max-sm:mfe-company-hidden mfe-company-text-gray-600 mfe-company-text-sm mfe-company-font-bold mfe-company-flex mfe-company-items-center mfe-company-gap-1 mfe-company-border-1 mfe-company-rounded-md mfe-company-px-3 mfe-company-py-2 mfe-company-border-gray-300 mfe-company-bg-gray-50 hover:mfe-company-bg-gray-100 mfe-company-max-w-max">
                   See Full Profile <i class="fa-solid fa-square-arrow-up-right"></i>
-              </a>
+                </span>
               </h1>
               <div class="pose" [innerHTML]="user()?.about ?? '' | markdown"></div>
               <a [href]="'/lk/' + application()?.user?.username" target="_blank" class="sm:mfe-company-hidden mfe-company-mt-4 mfe-company-text-gray-600 mfe-company-text-sm mfe-company-font-bold mfe-company-flex mfe-company-items-center mfe-company-gap-1 mfe-company-border-1 mfe-company-rounded-md mfe-company-px-3 mfe-company-py-2 mfe-company-border-gray-300 mfe-company-bg-gray-50 hover:mfe-company-bg-gray-100 mfe-company-max-w-max">
@@ -87,6 +88,10 @@ import { User } from '../data-access/user';
           }
         }
       </div>
+      <mfe-company-form-status [latestStatus]="getLatestStatus()" (onSubmit)="onSubmitStatusChange.emit({
+        jobApplicationId: app.id,
+        pipelineStage: $event
+      })" />
     }
   `,
 })
@@ -96,10 +101,14 @@ export class JobApplicationComponent {
   user = input<User | undefined | null>();
 
   loadUserInfoEvent = output<string>();
+  onSubmitStatusChange = output<{
+    jobApplicationId: number;
+    pipelineStage: NewPipelineStage;
+  }>();
   
   openAccordion = signal<boolean>(false);
 
-  private getLatestStatus = computed(() => {
+  getLatestStatus = computed(() => {
     const app = this.application();
     if (!app) return;
   
@@ -155,5 +164,19 @@ export class JobApplicationComponent {
       this.loadUserInfoEvent.emit(app.user.username);
     }
     this.openAccordion.set(!this.openAccordion());
+  }
+
+  openUserProfile() {
+    const app = this.application();
+    if (!app) return;
+
+    this.onSubmitStatusChange.emit({
+      jobApplicationId: app.id,
+      pipelineStage: {
+        status: 'VIEWED',
+      }
+    });
+    
+    window.open(`/lk/${app.user.username}`, '_blank');
   }
 }

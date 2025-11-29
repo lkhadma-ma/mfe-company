@@ -84,6 +84,9 @@
 .mfe-company-mb-40 {
   margin-bottom: 10rem;
 }
+.mfe-company-mb-\[5rem\] {
+  margin-bottom: 5rem;
+}
 .mfe-company-ml-1 {
   margin-left: 0.25rem;
 }
@@ -95,6 +98,9 @@
 }
 .mfe-company-ml-\[2rem\] {
   margin-left: 2rem;
+}
+.mfe-company-mr-2 {
+  margin-right: 0.5rem;
 }
 .mfe-company-mr-3 {
   margin-right: 0.75rem;
@@ -870,9 +876,6 @@
   }
   .max-sm\:mfe-company-h-\[5rem\] {
     height: 5rem;
-  }
-  .max-sm\:mfe-company-h-\[90vh\] {
-    height: 90vh;
   }
   .max-sm\:mfe-company-w-8 {
     width: 2rem;

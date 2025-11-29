@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'mfe-company-loading',
+  selector: 'mfe-company-loading-users',
   host: {
     class: 'mfe-company-w-full mfe-company-flex mfe-company-flex-col'
   },
@@ -19,6 +19,6 @@ import { Component } from '@angular/core';
     
   `
 })
-export class LoadingComponent {
+export class LoadingUsersComponent {
 
 }

@@ -4,21 +4,15 @@ const path = require('path');
 const distPath = path.join(__dirname, '..', 'dist', 'company', 'browser');
 const manifestPath = path.join(distPath, 'styles-manifest.json');
 
-/**
- * Safely read a directory. Returns null if folder does not exist or is locked.
- */
 function safeReadDir(directory) {
   try {
     if (!fs.existsSync(directory)) return null;
     return fs.readdirSync(directory);
   } catch (err) {
-    return null; // folder is locked or not ready yet
+    return null;
   }
 }
 
-/**
- * Returns the name of the first styles file in the directory, or null if none exists.
- */
 function findStylesFile(directory) {
   const files = safeReadDir(directory);
   if (!files) return null;
@@ -26,13 +20,17 @@ function findStylesFile(directory) {
 }
 
 /**
- * Generates styles-manifest.json in dist.
+ * Tries to generate the manifest, waiting if CSS is not yet ready.
  */
-function generateStylesManifest() {
+function generateStylesManifest(retries = 10, delay = 300) {
   const stylesFileName = findStylesFile(distPath);
 
   if (!stylesFileName) {
-    console.log('[Manifest] Styles file not ready yet. Skipping...');
+    if (retries > 0) {
+      setTimeout(() => generateStylesManifest(retries - 1, delay), delay);
+    } else {
+      console.warn('[Manifest] Styles file not found after waiting. Skipping...');
+    }
     return;
   }
 
@@ -46,4 +44,5 @@ function generateStylesManifest() {
   }
 }
 
+// Ejecuta la generación
 generateStylesManifest();

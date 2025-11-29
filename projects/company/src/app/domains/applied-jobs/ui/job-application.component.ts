@@ -1,12 +1,13 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { JobApplication, JobApplicationStatus } from '../data-access/job-application';
-import { RouterLink } from '@angular/router';
+import { JobApplication } from '../data-access/job-application';
+import { LoadingUserComponent } from "./loading-user.component";
+import { MarkdownPipe } from '@shared/pipe/markdown.pipe';
 
 @Component({
   selector: 'mfe-company-job-application',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoadingUserComponent, MarkdownPipe],
   template: `
 
     @let app = application();
@@ -15,7 +16,7 @@ import { RouterLink } from '@angular/router';
       <div class="mfe-company-bg-white mfe-company-border mfe-company-border-gray-200 mfe-company-rounded-xl mfe-company-shadow-sm mfe-company-overflow-hidden">
 
         <!-- Header -->
-        <div (click)="openAccordion.set(!openAccordion())"
+        <div
              class="mfe-company-p-6 max-sm:mfe-company-p-2 mfe-company-border-b mfe-company-border-gray-200">
 
           <div class="mfe-company-flex mfe-company-items-center mfe-company-gap-4">
@@ -23,22 +24,23 @@ import { RouterLink } from '@angular/router';
             <!-- Company Avatar -->
             <img [src]="app.user.avatar"
                  [alt]="app.user.name"
+                 (click)="toggleAccordion()"
                  class="max-sm:mfe-company-w-8 max-sm:mfe-company-h-8 mfe-company-w-12 mfe-company-h-12 mfe-company-rounded-full mfe-company-object-cover mfe-company-border mfe-company-border-gray-200">
 
             <!-- Job Info -->
-            <div class="mfe-company-flex-1">
-              <h3 
+            <div class="mfe-company-flex-1 mfe-company-select-none ">
+              <h3 (click)="toggleAccordion()"
                   class="mfe-company-cursor-pointer mfe-company-text-sm sm:mfe-company-text-lg mfe-company-font-semibold sm:mfe-company-w-max mfe-company-text-gray-900">
                 {{ app.user.name }}
               </h3>
-              <p class="mfe-company-text-gray-600 mfe-company-mt-1 mfe-company-text-xs sm:mfe-company-text-md">
+              <p class="mfe-company-text-gray-600 mfe-company-mt-1 mfe-company-text-xs sm:mfe-company-text-md sm:mfe-company-w-max">
                 {{ app.user.headline }}
               </p>
             </div>
 
             <!-- Status Badge -->
             <span [class]="statusBadgeClasses()"
-                  class="max-424:mfe-company-hidden mfe-company-px-3 mfe-company-py-1 mfe-company-rounded-full mfe-company-text-sm mfe-company-font-medium">
+                  class="mfe-company-select-none max-424:mfe-company-hidden mfe-company-px-3 mfe-company-py-1 mfe-company-rounded-full mfe-company-text-sm mfe-company-font-medium">
               {{ getStatusText() }}
             </span>
 
@@ -47,18 +49,47 @@ import { RouterLink } from '@angular/router';
 
         @if (openAccordion()) {
 
-          <!-- profile -->
-          <div class="mfe-company-p-6">
-            
-          </div>
+          @if (aboutUser()===undefined) {
+            <mfe-company-loading-user />
+          } @else if(aboutUser()===null) {
+            <div class="mfe-company-p-6 mfe-company-text-gray-500 mfe-company-text-center">
+              <div class="mfe-company-text-sm">
+                Reopen to load it again.
+              </div>
+              <div>
+                Unable to load candidate profile.
+              </div>
+            </div>
+
+          } @else {
+            <!-- profile -->
+            <div class="mfe-company-p-3 sm:mfe-company-p-6">
+              <h1 class="mfe-user-font-semibold mfe-user-tracking-wide sm:mfe-user-text-xl mfe-user-mb-4 mfe-user-flex mfe-user-justify-between mfe-company-items-center">
+                <span>About the Candidate</span>
+
+                <a [href]="'/lk/' + application()?.user?.username" target="_blank" class="max-sm:mfe-company-hidden mfe-company-text-gray-600 mfe-company-text-sm mfe-company-font-bold mfe-company-flex mfe-company-items-center mfe-company-gap-1 mfe-company-border-1 mfe-company-rounded-md mfe-company-px-3 mfe-company-py-2 mfe-company-border-gray-300 mfe-company-bg-gray-50 hover:mfe-company-bg-gray-100 mfe-company-max-w-max">
+                  See Full Profile <i class="fa-solid fa-square-arrow-up-right"></i>
+              </a>
+              </h1>
+              <div class="pose" [innerHTML]="aboutUser()! | markdown"></div>
+              <a [href]="'/lk/' + application()?.user?.username" target="_blank" class="sm:mfe-company-hidden mfe-company-mt-4 mfe-company-text-gray-600 mfe-company-text-sm mfe-company-font-bold mfe-company-flex mfe-company-items-center mfe-company-gap-1 mfe-company-border-1 mfe-company-rounded-md mfe-company-px-3 mfe-company-py-2 mfe-company-border-gray-300 mfe-company-bg-gray-50 hover:mfe-company-bg-gray-100 mfe-company-max-w-max">
+                  See Full Profile <i class="fa-solid fa-square-arrow-up-right"></i>
+              </a>
+            </div>
+          }
         }
       </div>
     }
   `,
 })
 export class JobApplicationComponent {
-  openAccordion = signal<boolean>(false);
+
   application = input<JobApplication>();
+  aboutUser = input<string | undefined | null>();
+
+  loadUserInfoEvent = output<string>();
+  
+  openAccordion = signal<boolean>(false);
 
   private getLatestStatus = computed(() => {
     const app = this.application();
@@ -108,4 +139,13 @@ export class JobApplicationComponent {
     return `${base} ${map[status]}`;
   }); 
 
+  toggleAccordion() {
+
+    const app = this.application();
+    if(!this.openAccordion()){
+      if (!app) return;
+      this.loadUserInfoEvent.emit(app.user.username);
+    }
+    this.openAccordion.set(!this.openAccordion());
+  }
 }

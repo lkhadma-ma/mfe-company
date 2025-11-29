@@ -1,10 +1,12 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SectionComponent } from "@shared/ui/section/section.component";
 import { JobApplication, JobApplicationStatus } from '../data-access/job-application';
 import { AppliedJobsStore } from '../data-access/applied-jobs.store';
-import { LoadingComponent } from "../ui/loading.component";
+import { LoadingUsersComponent } from "../ui/loading-users.component";
 import { JobApplicationComponent } from "../ui/job-application.component";
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { JobApplicationComponent } from "../ui/job-application.component";
   imports: [
     CommonModule,
     SectionComponent,
-    LoadingComponent,
+    LoadingUsersComponent,
     JobApplicationComponent
 ],
   template: `
@@ -50,11 +52,11 @@ import { JobApplicationComponent } from "../ui/job-application.component";
 
               <!-- Applications List -->
               <div class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-4">
-              @if(applications() === null) {
-                  <mfe-company-loading />
-                } @else if (applications()!.length > 0) {
+                @if(applications() === undefined) {
+                  <mfe-company-loading-users />
+                } @else if (applications()!==null && applications()!.length > 0) {
                   @for(app of filteredApplications(); track app.user) {
-                    <mfe-company-job-application [application]="app" />
+                    <mfe-company-job-application [application]="app" (loadUserInfoEvent)="loadUserInfoEvent($event)" [aboutUser]="aboutUser()" />
                   } @empty {
                     <div class="mfe-company-text-center mfe-company-py-12 mfe-company-text-gray-500">
                       <i class="fa-solid fa-briefcase mfe-company-text-4xl mfe-company-mb-4 mfe-company-text-gray-300"></i>
@@ -90,11 +92,15 @@ import { JobApplicationComponent } from "../ui/job-application.component";
     </mfe-company-section>
   `,
 })
-export class ShellAppliedJobsComponent {
+export class ShellAppliedJobsComponent implements OnInit{
+  
   private appliedJobsStore = inject(AppliedJobsStore);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   statusFilter = signal<JobApplicationStatus>('SUBMITTED');
   applications = this.appliedJobsStore.jobApplications;
+  aboutUser = this.appliedJobsStore.aboutUser;
 
   statusFilters = [
     { value: 'SUBMITTED', label: 'Submitted' },
@@ -110,6 +116,19 @@ export class ShellAppliedJobsComponent {
     const allApplications = this.applications() ?? [];
     return allApplications.filter(app => this.getLatestStatus(app) === filter);
   });
+
+  ngOnInit(): void {
+
+    this.route.paramMap
+    .subscribe(params => {
+      const jobId = Number(params.get('id'));
+      if (!jobId) {
+        this.router.navigate(['/lk/feed']);
+      }
+      this.appliedJobsStore.loadJobApplications(jobId);
+    });
+
+  }
   
   setStatusFilter(filter: any): void {
     this.statusFilter.set(filter as JobApplicationStatus);
@@ -161,5 +180,8 @@ export class ShellAppliedJobsComponent {
     return filterMap[filter];
   }
 
+  loadUserInfoEvent(username: string) {
+    this.appliedJobsStore.loadUserInfo(username);
+  }
 
 }

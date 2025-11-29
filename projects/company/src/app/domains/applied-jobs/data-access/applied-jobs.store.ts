@@ -6,34 +6,32 @@ import { JobApplication } from './job-application';
 export class AppliedJobsStore {
     private appliedJobsService = inject(AppliedJobsService);
     
-    private jobApplicationSignal = signal<JobApplication[] | null>([
-        {
-            user:{
-                username: 'oyaagoub5',
-                name: 'Oussama Yaagoub',
-                avatar: 'https://avatars.githubusercontent.com/u/63155454?v=4',
-                headline: 'Frontend Developer'
-            },
-            pipelineStage: [
-                {
-                    status: 'SUBMITTED',
-                    createdAt: '2025-11-26T22:50:12.567+00:00'
-                },
-                {
-                    status: 'VIEWED',
-                    createdAt: '2025-11-26T21:50:12.567+00:00'
-                }
-            ]
-        }
-    ]);
+    private jobApplicationSignal = signal<JobApplication[] | undefined | null>(undefined);
+    private aboutUserSignal = signal<string | undefined | null>(undefined);
 
     jobApplications = this.jobApplicationSignal.asReadonly();
+    aboutUser = this.aboutUserSignal.asReadonly();
 
-    loadJobApplications() {
-        this.jobApplicationSignal.set(null);
-        this.appliedJobsService.getAppliedJobs().subscribe({
+    loadJobApplications(id: number) {
+        this.jobApplicationSignal.set(undefined);
+        this.appliedJobsService.getAppliedJobs(id).subscribe({
             next: (applications) => {
                 this.jobApplicationSignal.set(applications);
+            },
+            error: () => {
+                this.jobApplicationSignal.set(null);
+            }
+        });
+    }
+
+    loadUserInfo(username: string) {
+        this.aboutUserSignal.set(undefined);
+        this.appliedJobsService.loadUserInfo(username).subscribe({
+            next: (userInfo) => {
+                this.aboutUserSignal.set(userInfo.about);
+            },
+            error: () => {
+                this.aboutUserSignal.set(null);
             }
         });
     }

@@ -6,10 +6,18 @@ import { JobApplication } from './job-application';
 export class AppliedJobsService {
     private http = inject(AuthHttpService);
 
-    private readonly baseUrl = 'http://localhost:8083/mbe-company/api/v1/applications';
+    private readonly companyBaseUrl = 'http://localhost:8083/mbe-company/api/v1';
+    private readonly userBaseUrl = 'http://localhost:8080/mbe-user/api/v1';
 
-    getAppliedJobs() {
-        return this.http.get<JobApplication[]>(`${this.baseUrl}/applied-jobs`);
+
+    getAppliedJobs(id: number) {
+        return this
+            .http.get<JobApplication[]>(`${this.companyBaseUrl}/applications/applied?idJob=${id}`);
     }
     
+    loadUserInfo(username: string) {
+        return this.http.get<{
+            about: string;
+        }>(`${this.userBaseUrl}/users/job-application/${username}`);
+    }
 }

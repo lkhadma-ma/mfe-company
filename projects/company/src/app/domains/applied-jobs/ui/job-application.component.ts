@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { JobApplication } from '../data-access/job-application';
 import { LoadingUserComponent } from "./loading-user.component";
 import { MarkdownPipe } from '@shared/pipe/markdown.pipe';
+import { User } from '../data-access/user';
 
 @Component({
   selector: 'mfe-company-job-application',
@@ -49,9 +50,9 @@ import { MarkdownPipe } from '@shared/pipe/markdown.pipe';
 
         @if (openAccordion()) {
 
-          @if (aboutUser()===undefined) {
+          @if (user()===undefined) {
             <mfe-company-loading-user />
-          } @else if(aboutUser()===null) {
+          } @else if(user()===null) {
             <div class="mfe-company-p-6 mfe-company-text-gray-500 mfe-company-text-center">
               <div class="mfe-company-text-sm">
                 Reopen to load it again.
@@ -64,6 +65,13 @@ import { MarkdownPipe } from '@shared/pipe/markdown.pipe';
           } @else {
             <!-- profile -->
             <div class="mfe-company-p-3 sm:mfe-company-p-6">
+            <h1 class="mfe-user-font-semibold mfe-user-tracking-wide sm:mfe-user-text-xl mfe-user-mb-4 mfe-user-flex mfe-user-justify-between mfe-company-items-center">
+                <span>Candidate's Contact Information </span>
+              </h1>
+              <div class="mfe-company-flex mfe-company-items-center mfe-company-gap-4 mfe-company-mb-4 mfe-company-text-gray-600 mfe-company-text-sm">
+                <i class="fa-solid fa-phone mfe-company-mr-2 mfe-company-text-gray-500"></i>
+                <span>+{{user()?.phone ?? '212 xxx xxx xxx'}}</span>
+              </div>
               <h1 class="mfe-user-font-semibold mfe-user-tracking-wide sm:mfe-user-text-xl mfe-user-mb-4 mfe-user-flex mfe-user-justify-between mfe-company-items-center">
                 <span>About the Candidate</span>
 
@@ -71,7 +79,7 @@ import { MarkdownPipe } from '@shared/pipe/markdown.pipe';
                   See Full Profile <i class="fa-solid fa-square-arrow-up-right"></i>
               </a>
               </h1>
-              <div class="pose" [innerHTML]="aboutUser()! | markdown"></div>
+              <div class="pose" [innerHTML]="user()?.about ?? '' | markdown"></div>
               <a [href]="'/lk/' + application()?.user?.username" target="_blank" class="sm:mfe-company-hidden mfe-company-mt-4 mfe-company-text-gray-600 mfe-company-text-sm mfe-company-font-bold mfe-company-flex mfe-company-items-center mfe-company-gap-1 mfe-company-border-1 mfe-company-rounded-md mfe-company-px-3 mfe-company-py-2 mfe-company-border-gray-300 mfe-company-bg-gray-50 hover:mfe-company-bg-gray-100 mfe-company-max-w-max">
                   See Full Profile <i class="fa-solid fa-square-arrow-up-right"></i>
               </a>
@@ -85,7 +93,7 @@ import { MarkdownPipe } from '@shared/pipe/markdown.pipe';
 export class JobApplicationComponent {
 
   application = input<JobApplication>();
-  aboutUser = input<string | undefined | null>();
+  user = input<User | undefined | null>();
 
   loadUserInfoEvent = output<string>();
   

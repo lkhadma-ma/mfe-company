@@ -19,11 +19,11 @@ import { filter } from 'rxjs';
 ],
   template: `
     <mfe-company-section ngxClass="md:mfe-company-pt-[5rem]" >
-      <div class="mfe-company-w-full mfe-company-mb-40 md:mfe-company-space-x-6 md:mfe-company-flex ">
+      <div class="mfe-company-w-full mfe-company-mb-[5rem] md:mfe-company-space-x-6 md:mfe-company-flex ">
         <div class="mfe-company-w-full">
           <div class="mfe-company-w-full mfe-company-flex mfe-company-flex-col mfe-company-space-y-4">
           <!-- start -->
-          <div class="max-sm:mfe-company-h-[90vh] max-sm:mfe-company-border sm:mfe-company-rounded-lg mfe-company-bg-white">
+          <div class="max-sm:mfe-company-border sm:mfe-company-rounded-lg mfe-company-bg-white">
             <div class="mfe-company-px-4 mfe-company-py-4 mfe-company-space-y-4">
               <div class="mfe-company-space-y-2">
                   <h2 class="mfe-company-text-2xl mfe-company-font-semibold mfe-company-text-gray-900">
@@ -56,7 +56,7 @@ import { filter } from 'rxjs';
                   <mfe-company-loading-users />
                 } @else if (applications()!==null && applications()!.length > 0) {
                   @for(app of filteredApplications(); track app.user) {
-                    <mfe-company-job-application [application]="app" (loadUserInfoEvent)="loadUserInfoEvent($event)" [aboutUser]="aboutUser()" />
+                    <mfe-company-job-application [application]="app" (loadUserInfoEvent)="loadUserInfoEvent($event)" [user]="user()" />
                   } @empty {
                     <div class="mfe-company-text-center mfe-company-py-12 mfe-company-text-gray-500">
                       <i class="fa-solid fa-briefcase mfe-company-text-4xl mfe-company-mb-4 mfe-company-text-gray-300"></i>
@@ -100,7 +100,7 @@ export class ShellAppliedJobsComponent implements OnInit{
 
   statusFilter = signal<JobApplicationStatus>('SUBMITTED');
   applications = this.appliedJobsStore.jobApplications;
-  aboutUser = this.appliedJobsStore.aboutUser;
+  user = this.appliedJobsStore.user;
 
   statusFilters = [
     { value: 'SUBMITTED', label: 'Submitted' },
